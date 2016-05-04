@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntidadLibro;
+using ListarElementos;
 
 namespace GestionBiblioteca
 {
@@ -17,6 +18,8 @@ namespace GestionBiblioteca
             int contadorLibros = 0;
             // Diccionario en el que se guardan los libros 
             Dictionary<string, Libro> diccionarioLibros = new Dictionary<string, Libro>();
+
+            ListarLibros lb = new ListarLibros();
 
             // Creo aquí la cabecera para poder usarla allí donde haga falta
             StringBuilder cabecera = new StringBuilder();
@@ -109,17 +112,7 @@ namespace GestionBiblioteca
                         
                         Console.WriteLine(cabecera);
 
-                        // TODO refactorizar el listado de todos los libros
-                        foreach (Libro item in diccionarioLibros.Values)
-                        {
-                            StringBuilder libroPorPantalla = new StringBuilder();
-                            libroPorPantalla.Append(item.Autor);
-                            libroPorPantalla.Append("\t\t\t\t");
-                            libroPorPantalla.Append(item.Titulo);
-                            libroPorPantalla.Append("\t\t\t\t");
-                            libroPorPantalla.Append(item.ISBN);
-                            Console.WriteLine(libroPorPantalla);
-                        }
+                        lb.todosLosLibros(diccionarioLibros);
 
                         Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
                         Console.ReadLine();
