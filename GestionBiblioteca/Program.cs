@@ -51,13 +51,15 @@ namespace GestionBiblioteca
 
                         if (listaLibros.ContainsKey(isbn))
                         {
-                            Console.WriteLine("El ISBN \"" + isbn + "\" ya existe.\nyno puede haber dos iguales");
+                            Console.WriteLine("El ISBN \"" + isbn + "\" ya existe.\ny no puede haber dos iguales");
+                            Console.WriteLine("Pulsa cualquier tecla para continuar");
                             Console.ReadLine();
+                            Console.Clear();
                         }
                         else
                         {
                             Libro libro = new Libro();
-                            addIsbn(isbn, libro);
+                            libro.ISBN = isbn;
                             Console.WriteLine("Introduce el titulo del libro: ");
                             libro.Titulo = Console.ReadLine();
                             Console.WriteLine("Introduce el autor del libro: ");
