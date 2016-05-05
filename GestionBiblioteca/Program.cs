@@ -38,9 +38,11 @@ namespace GestionBiblioteca
                 Console.Write("Introduzca el número de la opción que desea realizar: ");
                 string opcion = Console.ReadLine();
 
+
                 switch (opcion)
                 {
                     // Añadir Libro
+                    //TODO refactorizar menu principal
                     case "1":
                         // Limpio la consola para no guarrearla mucho
                         Console.Clear();
@@ -88,8 +90,8 @@ namespace GestionBiblioteca
                         break;
 
                     case "2":
-
                         // Listar todos los libros
+                        // TODO refactorizar listar todos los libros
                         Console.Clear();
                         Console.WriteLine("Has elegido listar todos los libros");
                         
@@ -133,30 +135,70 @@ namespace GestionBiblioteca
                         Console.Clear();
                         break;
                     case "4":
-                        // Modificar un libro
-                        // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
+                                                                       
+                        bool seguirModificando = true;
 
-                        ListarLibros infoLibro = new ListarLibros();
-
-                        Console.WriteLine("Has elegido modificar un libro");
-
-                        listarLibros.todosLosLibros(diccionarioLibros);
-
-                        string isbnModificar;
-
-                        // TODO refactorizar la selección del libro por ISBN
-                        do
+                        while (seguirModificando)
                         {
-                            Console.WriteLine("Introduce el ISBN del libro que quieras modificar");
-                            isbnModificar = Console.ReadLine();
-                        } while (!diccionarioLibros.ContainsKey(isbnModificar));
+                            // Modificar un libro
+                            // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
 
-                        infoLibro.infoLibro(diccionarioLibros, isbnModificar);
+                            ListarLibros infoLibro = new ListarLibros();
 
-                        Console.ReadLine();
+                            Console.WriteLine("Has elegido modificar un libro");
 
+                            listarLibros.todosLosLibros(diccionarioLibros);
 
-                        // TODO implementar la opción de modificar un libro
+                            string isbnModificar;
+
+                            // TODO refactorizar la selección del libro por ISBN
+                            do
+                            {
+                                Console.WriteLine("Introduce el ISBN del libro que quieras modificar");
+                                isbnModificar = Console.ReadLine();
+                            } while (!diccionarioLibros.ContainsKey(isbnModificar));
+
+                            infoLibro.infoLibro(diccionarioLibros, isbnModificar);
+                            
+                            Console.WriteLine("¿Qué quiere modificar?");
+                            string menuModificar = Console.ReadLine();
+
+                            switch (menuModificar)
+                            {
+                                case "Fecha de publicacion":
+                                    Console.Write("Introduce una nueva fecha de publicación (DD/MM/AAAA)");
+                                    diccionarioLibros[isbnModificar].FechaPublicacion = DateTime.Parse(Console.ReadLine());
+                                    break;
+                                case "Fecha de alta":
+                                    Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA)");
+                                    diccionarioLibros[isbnModificar].FechaAlta = DateTime.Parse(Console.ReadLine());
+                                    break;
+                                case "Ejemplares":
+                                    Console.Write("Introduce una la cantidad de ejemplares que quieras");
+                                    diccionarioLibros[isbnModificar].Ejemplares = int.Parse(Console.ReadLine());
+                                    break;
+                                case "Autor":
+                                    Console.Write("Introduce el nuevo autor");
+                                    diccionarioLibros[isbnModificar].Autor = Console.ReadLine();
+                                    break;
+                                case "Titulo":
+                                    Console.Write("Introduce el nuevo título");
+                                    diccionarioLibros[isbnModificar].Titulo = Console.ReadLine();
+                                    break;
+                                default:
+                                    Console.WriteLine("Elige una opción válida");
+                                    menuModificar = Console.ReadLine();
+                                    break;
+                            }
+
+                            Console.WriteLine("Quieres seguir?(S/N)");
+                            string respuesta = Console.ReadLine();
+                            if (respuesta.Equals("N") || respuesta.Equals("n"))
+                            {
+                                seguirModificando = false;
+                            }
+                        }
+
                         break;
                     case "5":
                         // Salir
