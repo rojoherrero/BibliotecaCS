@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntidadLibro;
+using LibreriaEntidades;
 using ListarElementos;
 
 namespace GestionBiblioteca
@@ -14,26 +14,16 @@ namespace GestionBiblioteca
         {
             // Esta variable es la que controla si se quiere salir de la aplicación
             bool seguir = true;
-            // Esta variable controla el número de libros que se han introducido 
-            int contadorLibros = 0;
+
             // Diccionario en el que se guardan los libros 
             Dictionary<string, Libro> diccionarioLibros = new Dictionary<string, Libro>();
 
-            ListarLibros lb = new ListarLibros();
-
-            // Creo aquí la cabecera para poder usarla allí donde haga falta
-            StringBuilder cabecera = new StringBuilder();
-            cabecera.Append("Autor");
-            cabecera.Append("\t\t\t\t");
-            cabecera.Append("Título");
-            cabecera.Append("\t\t\t\t");
-            cabecera.Append("ISBN");
-            Console.WriteLine(cabecera);
+            // Lo instancio aquí para poder acceder a listarLibros en cualquier momento
+            ListarLibros listarLibros = new ListarLibros();
 
             // Sólo aparece al inicio de la aplicación
             Console.WriteLine("Maara tulda");
             Console.WriteLine("Gestión de la biblioteca de Rivendel");
-
             
             while (seguir)
             {
@@ -45,20 +35,6 @@ namespace GestionBiblioteca
                 Console.WriteLine("4) Modificar Libro");
                 Console.WriteLine("5) Salir");
 
-                // Número de libros que hay guardados
-                if (contadorLibros == 0)
-                {
-                    Console.WriteLine("No hay ningún libro. Introduce alguno");
-                }
-                else if (contadorLibros == 1)
-                {
-                    Console.WriteLine("Hay un libro");
-                }
-                else
-                {
-                    Console.WriteLine("No hay " + contadorLibros + " libros.");
-                }
-
                 Console.Write("Introduzca el número de la opción que desea realizar: ");
                 string opcion = Console.ReadLine();
 
@@ -68,14 +44,20 @@ namespace GestionBiblioteca
                     case "1":
                         // Limpio la consola para no guarrearla mucho
                         Console.Clear();
+
+                        // Inicio la recogida de los datos para crear el nuevo libro
                         Console.WriteLine("Introduce el ISBN del libro: ");
                         string isbn = Console.ReadLine();
 
                         // Compruebo que no este el ISBN guardado
                         if (diccionarioLibros.ContainsKey(isbn))
                         {
-                            //TODO Implementar número de ejemplares
-                            Console.WriteLine("El ISBN \"" + isbn + "\" ya existe.\ny no puede haber dos iguales");
+                            // Si el ISBN existe:
+                            Console.WriteLine("El ISBN \"" + isbn + "\" ya existe.\npor lo que se ha aumentado en una unidad el número de ejemplares");
+                            // Aumento el número de ejempalares en una unidad
+                            diccionarioLibros[isbn].Ejemplares++;
+                            // Informo del total de ejemplares
+                            Console.WriteLine("El número total de ejemplares es: " + diccionarioLibros[isbn].Ejemplares);
                             Console.WriteLine("Pulsa cualquier tecla para continuar");
                             Console.ReadLine();
                             Console.Clear();
@@ -83,81 +65,64 @@ namespace GestionBiblioteca
                         }
                         else
                         {
-                            // TODO intentar refactorizar
-                            // TODO implementar fecha de alta
-                            // TODO implementar fecha de publicación
-                            // Recogo los datos del libro y lo guardo en un libro nuevo
+                            // Como no existe el isbn en memoria, instancio un nuevo libro
                             Libro libro = new Libro();
+
+                            // TODO intentar refactorizar menu principal
+
+                            // Recogo los datos del libro y lo guardo en un libro nuevo
                             libro.ISBN = isbn;
                             Console.WriteLine("Introduce el titulo del libro: ");
                             libro.Titulo = Console.ReadLine();
                             Console.WriteLine("Introduce el autor del libro: ");
                             libro.Autor = Console.ReadLine();
+                            Console.WriteLine("Introduce la fecha de publicación del libro.\nEl formato de la fecha tiene que ser el siguiente DD/MM/AAAA");
+                            libro.FechaPublicacion = DateTime.Parse(Console.ReadLine());
                             libro.FechaAlta = DateTime.Today;
+                            libro.Ejemplares = 1;
 
                             // añado el libro al diccionario
                             diccionarioLibros.Add(isbn, libro);
 
                             // aumento el contador en una unidad
-                            contadorLibros++;
                             Console.Clear();
+                            break;
                         }
 
-                        break;
                     case "2":
 
                         // Listar todos los libros
                         Console.Clear();
                         Console.WriteLine("Has elegido listar todos los libros");
                         
-                        Console.WriteLine(cabecera);
-
-                        lb.todosLosLibros(diccionarioLibros);
+                        listarLibros.todosLosLibros(diccionarioLibros);
 
                         Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
                         Console.ReadLine();
                         Console.Clear();
                         break;
                     case "3":
-
-                        // Eliminar un libro
+                        // Eliminar un libro(
                         // TODO dar opción a eliminar más de un libro a la vez
+                        // TODO una vez funciones todo, refactorizar la funcionalidad de eliminar
                         Console.Clear();
-                        Console.WriteLine("Has elegido listar todos los libros");
-                        
-                        Console.WriteLine(cabecera);
+                        Console.WriteLine("Has elegido eliminar un libro");
 
-                        // TODO refactorizar el listado de todos los libros
-                        foreach (Libro item in diccionarioLibros.Values)
-                        {
-                            StringBuilder libroPorPantalla = new StringBuilder();
-                            libroPorPantalla.Append(item.Autor);
-                            libroPorPantalla.Append("\t\t\t\t");
-                            libroPorPantalla.Append(item.Titulo);
-                            libroPorPantalla.Append("\t\t\t\t");
-                            libroPorPantalla.Append(item.ISBN);
-                            Console.WriteLine(libroPorPantalla);
-                        }
+                        listarLibros.todosLosLibros(diccionarioLibros);
 
                         Console.WriteLine("Introduce el ISBN del libro que quieras eliminar");
-                        // TODO comprobar ISBN
-                        // TODO hacer más fácil eliminar un libro
+                        
+                        // TODO comprobar que el ISBN esta guardado y se puede borrar
                         string isbnEliminar = Console.ReadLine();
+
+                        if (!diccionarioLibros.Keys.Equals(isbnEliminar))
+                        {
+                            break;
+                        }
+
                         diccionarioLibros.Remove(isbnEliminar);
 
-                        Console.WriteLine(cabecera);
-
-                        // TODO refactorizar el listado de todos los libros
-                        foreach (Libro item in diccionarioLibros.Values)
-                        {
-                            StringBuilder libroPorPantalla = new StringBuilder();
-                            libroPorPantalla.Append(item.Autor);
-                            libroPorPantalla.Append("\t\t\t\t");
-                            libroPorPantalla.Append(item.Titulo);
-                            libroPorPantalla.Append("\t\t\t\t");
-                            libroPorPantalla.Append(item.ISBN);
-                            Console.WriteLine(libroPorPantalla);
-                        }
+                        listarLibros.todosLosLibros(diccionarioLibros);
 
                         Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
                         Console.ReadLine();
@@ -165,11 +130,16 @@ namespace GestionBiblioteca
                         break;
                     case "4":
                         // Modificar un libro
+                        // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
+                        Console.WriteLine("Has elegido modificar un libro");
+
+                        listarLibros.todosLosLibros(diccionarioLibros);
+
+                        Console.WriteLine("ISBN del libro que quieres modificar");
 
                         // TODO implementar la opción de modificar un libro
                         break;
                     case "5":
-
                         // Salir
                         seguir = false;
                         Console.WriteLine("Muchas gracias por haber confiado en nuestra aplicación");
@@ -177,9 +147,11 @@ namespace GestionBiblioteca
                         Console.ReadLine();
                         break;
                     default:
+                        Console.WriteLine("Por favor, introduce una opción válida");
+                        Console.WriteLine("Presiona cualquier tecla para continuar");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
-
-
                 }
             }
         }
