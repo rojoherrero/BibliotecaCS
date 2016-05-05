@@ -63,31 +63,29 @@ namespace GestionBiblioteca
                             Console.Clear();
                             break;
                         }
-                        else
-                        {
-                            // Como no existe el isbn en memoria, instancio un nuevo libro
-                            Libro libro = new Libro();
 
-                            // TODO intentar refactorizar menu principal
+                        // Como no existe el isbn en memoria, instancio un nuevo libro
+                        Libro libro = new Libro();
 
-                            // Recogo los datos del libro y lo guardo en un libro nuevo
-                            libro.ISBN = isbn;
-                            Console.WriteLine("Introduce el titulo del libro: ");
-                            libro.Titulo = Console.ReadLine();
-                            Console.WriteLine("Introduce el autor del libro: ");
-                            libro.Autor = Console.ReadLine();
-                            Console.WriteLine("Introduce la fecha de publicación del libro.\nEl formato de la fecha tiene que ser el siguiente DD/MM/AAAA");
-                            libro.FechaPublicacion = DateTime.Parse(Console.ReadLine());
-                            libro.FechaAlta = DateTime.Today;
-                            libro.Ejemplares = 1;
+                        // TODO intentar refactorizar menu principal
 
-                            // añado el libro al diccionario
-                            diccionarioLibros.Add(isbn, libro);
+                        // Recogo los datos del libro y lo guardo en un libro nuevo
+                        libro.ISBN = isbn;
+                        Console.WriteLine("Introduce el titulo del libro: ");
+                        libro.Titulo = Console.ReadLine();
+                        Console.WriteLine("Introduce el autor del libro: ");
+                        libro.Autor = Console.ReadLine();
+                        Console.WriteLine("Introduce la fecha de publicación del libro.\nEl formato de la fecha tiene que ser el siguiente DD/MM/AAAA");
+                        libro.FechaPublicacion = DateTime.Parse(Console.ReadLine());
+                        libro.FechaAlta = DateTime.Today;
+                        libro.Ejemplares = 1;
 
-                            // aumento el contador en una unidad
-                            Console.Clear();
-                            break;
-                        }
+                        // añado el libro al diccionario
+                        diccionarioLibros.Add(isbn, libro);
+
+                        // aumento el contador en una unidad
+                        Console.Clear();
+                        break;
 
                     case "2":
 
@@ -101,6 +99,7 @@ namespace GestionBiblioteca
                         Console.ReadLine();
                         Console.Clear();
                         break;
+
                     case "3":
                         // Eliminar un libro(
                         // TODO dar opción a eliminar más de un libro a la vez
@@ -110,17 +109,22 @@ namespace GestionBiblioteca
 
                         listarLibros.todosLosLibros(diccionarioLibros);
 
-                        Console.WriteLine("Introduce el ISBN del libro que quieras eliminar");
-                        
-                        // TODO comprobar que el ISBN esta guardado y se puede borrar
-                        string isbnEliminar = Console.ReadLine();
+                        string isbnEliminar;
 
-                        if (!diccionarioLibros.Keys.Equals(isbnEliminar))
+                        // TODO refactorizar la selección del libro por ISBN
+                        do
                         {
-                            break;
-                        }
+                            Console.WriteLine("Introduce el ISBN del libro que quieras eliminar");
+                            isbnEliminar = Console.ReadLine();
+                        } while (!diccionarioLibros.ContainsKey(isbnEliminar));
 
-                        diccionarioLibros.Remove(isbnEliminar);
+                        Console.WriteLine("Estás seguro? (S/N)");
+                        string continuar = Console.ReadLine();
+
+                        if (continuar.Equals("S") || continuar.Equals("s"))
+                        {
+                            diccionarioLibros.Remove(isbnEliminar);
+                        }
 
                         listarLibros.todosLosLibros(diccionarioLibros);
 
@@ -131,11 +135,26 @@ namespace GestionBiblioteca
                     case "4":
                         // Modificar un libro
                         // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
+
+                        ListarLibros infoLibro = new ListarLibros();
+
                         Console.WriteLine("Has elegido modificar un libro");
 
                         listarLibros.todosLosLibros(diccionarioLibros);
 
-                        Console.WriteLine("ISBN del libro que quieres modificar");
+                        string isbnModificar;
+
+                        // TODO refactorizar la selección del libro por ISBN
+                        do
+                        {
+                            Console.WriteLine("Introduce el ISBN del libro que quieras modificar");
+                            isbnModificar = Console.ReadLine();
+                        } while (!diccionarioLibros.ContainsKey(isbnModificar));
+
+                        infoLibro.infoLibro(diccionarioLibros, isbnModificar);
+
+                        Console.ReadLine();
+
 
                         // TODO implementar la opción de modificar un libro
                         break;

@@ -1,4 +1,4 @@
-﻿using EntidadLibro;
+﻿using LibreriaEntidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,28 @@ namespace ListarElementos
 {
     public class ListarLibros
     {
+
+        public void infoLibro(Dictionary<string, Libro> nombreDiccionario, string llave)
+        {
+            StringBuilder entradaInformacion = new StringBuilder();
+            entradaInformacion.Append("Autor: ");
+            entradaInformacion.Append(nombreDiccionario[llave].Autor);
+            entradaInformacion.Append("\n");
+            entradaInformacion.Append("Titulo: ");
+            entradaInformacion.Append(nombreDiccionario[llave].Titulo);
+            entradaInformacion.Append("\n");
+            entradaInformacion.Append("Ejemplares: ");
+            entradaInformacion.Append(nombreDiccionario[llave].Ejemplares.ToString());
+            entradaInformacion.Append("\n");
+            entradaInformacion.Append("Fecha de alta: ");
+            entradaInformacion.Append(nombreDiccionario[llave].FechaAlta.ToShortDateString());
+            entradaInformacion.Append("\n");
+            entradaInformacion.Append("Fecha de publicación: ");
+            entradaInformacion.Append(nombreDiccionario[llave].FechaPublicacion.ToShortDateString());
+
+            Console.WriteLine(entradaInformacion.ToString());
+        }
+        
         public void todosLosLibros(Dictionary<string, Libro> nombreDiccionario)
         {
             StringBuilder cabecera = new StringBuilder();
@@ -36,36 +58,11 @@ namespace ListarElementos
                 libroPorPantalla.Append("\t\t");
                 libroPorPantalla.Append(libro.Ejemplares);
                 libroPorPantalla.Append("\t\t");
-                libroPorPantalla.Append(fechaSencillaAlta(libro));
+                libroPorPantalla.Append(libro.FechaAlta.ToShortDateString());
                 libroPorPantalla.Append("\t\t");
-                libroPorPantalla.Append(fechaSencillaPublicacion(libro));
+                libroPorPantalla.Append(libro.FechaPublicacion.ToShortDateString());
                 Console.WriteLine(libroPorPantalla);
             }
-        }
-
-        // TODO Tengo que aprender Lambdas para refactorizar estos dos métodos privados
-        private string fechaSencillaPublicacion(Libro libro)
-        {
-            StringBuilder fechaPublicacion = new StringBuilder();
-            fechaPublicacion.Append(libro.FechaPublicacion.Day);
-            fechaPublicacion.Append("/");
-            fechaPublicacion.Append(libro.FechaPublicacion.Month);
-            fechaPublicacion.Append("/");
-            fechaPublicacion.Append(libro.FechaPublicacion.Year);
-
-            return fechaPublicacion.ToString();
-        }
-
-        private string fechaSencillaAlta(Libro libro)
-        {
-            StringBuilder fechaPublicacion = new StringBuilder();
-            fechaPublicacion.Append(libro.FechaAlta.Day);
-            fechaPublicacion.Append("/");
-            fechaPublicacion.Append(libro.FechaAlta.Month);
-            fechaPublicacion.Append("/");
-            fechaPublicacion.Append(libro.FechaAlta.Year);
-
-            return fechaPublicacion.ToString();
         }
     }
 }
