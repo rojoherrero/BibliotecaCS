@@ -1,4 +1,5 @@
 ﻿using LibreriaEntidades;
+using ListarElementos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace OpcionesMenu
 {
     public class OperacionesLibro
     {
+        ListarLibros listarLibros = new ListarLibros();
+
         public static void NuevoLibro(Dictionary<string,Libro> nombreDiccionario)
         {
             // Inicio la recogida de los datos para crear el nuevo libro
@@ -50,6 +53,20 @@ namespace OpcionesMenu
                 // añado el libro al diccionario
                 nombreDiccionario.Add(isbn, libro);
             }
+        }
+
+        public static void ListarLibros(Dictionary<string, Libro> nombreDiccionario)
+        {
+            // Listar todos los libros
+            // TODO refactorizar listar todos los libros
+            Console.Clear();
+            Console.WriteLine("Has elegido listar todos los libros");
+
+            listarLibros.todosLosLibros(nombreDiccionario);
+
+            Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }

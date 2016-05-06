@@ -58,12 +58,9 @@ namespace GestionBiblioteca
                         // Listar todos los libros
                         // TODO refactorizar listar todos los libros
                         Console.Clear();
-                        Console.WriteLine("Has elegido listar todos los libros");
-                        
-                        listarLibros.todosLosLibros(diccionarioLibros);
 
-                        Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
-                        Console.ReadLine();
+                        OperacionesLibro.ListarLibros(diccionarioLibros);
+
                         Console.Clear();
                         break;
 

@@ -48,6 +48,10 @@
       <Project>{BE0E8F9B-80BB-4916-A685-FC48829E5196}</Project>
       <Name>LibreriaEntidades</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ListarElementos\ListarElementos.csproj">
+      <Project>{E1994A12-89A5-45A5-A186-01F3684C87F3}</Project>
+      <Name>ListarElementos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
