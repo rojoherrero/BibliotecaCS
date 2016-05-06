@@ -43,7 +43,7 @@ namespace GestionBiblioteca
                 switch (opcion)
                 {
                     // Añadir Libro
-                    //TODO refactorizar menu principal
+
                     case "1":
                         // Limpio la consola para no guarrearla mucho
                         Console.Clear();
@@ -56,7 +56,7 @@ namespace GestionBiblioteca
 
                     case "2":
                         // Listar todos los libros
-                        // TODO refactorizar listar todos los libros
+
                         Console.Clear();
 
                         OperacionesLibro.ListarLibros(diccionarioLibros);
@@ -66,102 +66,26 @@ namespace GestionBiblioteca
 
                     case "3":
                         // Eliminar un libro(
-                        // TODO dar opción a eliminar más de un libro a la vez
-                        // TODO una vez funciones todo, refactorizar la funcionalidad de eliminar
+
                         Console.Clear();
-                        Console.WriteLine("Has elegido eliminar un libro");
 
-                        listarLibros.todosLosLibros(diccionarioLibros);
+                        OperacionesLibro.EliminarLibro(diccionarioLibros);
 
-                        string isbnEliminar;
-
-                        // TODO refactorizar la selección del libro por ISBN
-                        do
-                        {
-                            Console.WriteLine("Introduce el ISBN del libro que quieras eliminar");
-                            isbnEliminar = Console.ReadLine();
-                        } while (!diccionarioLibros.ContainsKey(isbnEliminar));
-
-                        Console.WriteLine("Estás seguro? (S/N)");
-                        string continuar = Console.ReadLine();
-
-                        if (continuar.Equals("S") || continuar.Equals("s"))
-                        {
-                            diccionarioLibros.Remove(isbnEliminar);
-                        }
-
-                        listarLibros.todosLosLibros(diccionarioLibros);
-
-                        Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
-                        Console.ReadLine();
                         Console.Clear();
                         break;
+
                     case "4":
+
+                        // Modificar Libro
+
+                        Console.Clear();
+
+                        OperacionesLibro.ModificarLibro(diccionarioLibros);
+
+                        Console.Clear();
                                                                        
-                        bool seguirModificando = true;
-
-                        while (seguirModificando)
-                        {
-                            // Modificar un libro
-                            // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
-
-                            ListarLibros infoLibro = new ListarLibros();
-
-                            Console.WriteLine("Has elegido modificar un libro");
-
-                            listarLibros.todosLosLibros(diccionarioLibros);
-
-                            string isbnModificar;
-
-                            // TODO refactorizar la selección del libro por ISBN
-                            do
-                            {
-                                Console.WriteLine("Introduce el ISBN del libro que quieras modificar");
-                                isbnModificar = Console.ReadLine();
-                            } while (!diccionarioLibros.ContainsKey(isbnModificar));
-
-                            infoLibro.infoLibro(diccionarioLibros, isbnModificar);
-                            
-                            Console.WriteLine("¿Qué quiere modificar?");
-                            string menuModificar = Console.ReadLine();
-
-                            switch (menuModificar)
-                            {
-                                case "Fecha de publicacion":
-                                    Console.Write("Introduce una nueva fecha de publicación (DD/MM/AAAA)");
-                                    diccionarioLibros[isbnModificar].FechaPublicacion = DateTime.Parse(Console.ReadLine());
-                                    break;
-                                case "Fecha de alta":
-                                    Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA)");
-                                    diccionarioLibros[isbnModificar].FechaAlta = DateTime.Parse(Console.ReadLine());
-                                    break;
-                                case "Ejemplares":
-                                    Console.Write("Introduce una la cantidad de ejemplares que quieras");
-                                    diccionarioLibros[isbnModificar].Ejemplares = int.Parse(Console.ReadLine());
-                                    break;
-                                case "Autor":
-                                    Console.Write("Introduce el nuevo autor");
-                                    diccionarioLibros[isbnModificar].Autor = Console.ReadLine();
-                                    break;
-                                case "Titulo":
-                                    Console.Write("Introduce el nuevo título");
-                                    diccionarioLibros[isbnModificar].Titulo = Console.ReadLine();
-                                    break;
-                                default:
-                                    Console.WriteLine("Elige una opción válida");
-                                    menuModificar = Console.ReadLine();
-                                    break;
-                            }
-
-                            Console.WriteLine("Quieres seguir?(S/N)");
-                            string respuesta = Console.ReadLine();
-                            if (respuesta.Equals("N") || respuesta.Equals("n"))
-                            {
-                                seguirModificando = false;
-                            }
-                        }
-
                         break;
+
                     case "5":
                         // Salir
                         seguir = false;
