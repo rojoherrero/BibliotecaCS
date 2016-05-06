@@ -19,9 +19,6 @@ namespace GestionBiblioteca
             // Diccionario en el que se guardan los libros 
             Dictionary<string, Libro> diccionarioLibros = new Dictionary<string, Libro>();
 
-            // Lo instancio aquí para poder acceder a listarLibros en cualquier momento
-            OperacionesSobreLibros listarLibros = new OperacionesSobreLibros();
-
             // Sólo aparece al inicio de la aplicación
             Console.WriteLine("Maara tulda");
             Console.WriteLine("Gestión de la biblioteca de Rivendel");
