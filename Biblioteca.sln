@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionBiblioteca", "Gestio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListarElementos", "ListarElementos\ListarElementos.csproj", "{E1994A12-89A5-45A5-A186-01F3684C87F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcionesMenu", "OpcionesMenu\OpcionesMenu.csproj", "{0B73AC55-33B8-4399-9765-534B49409763}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E1994A12-89A5-45A5-A186-01F3684C87F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1994A12-89A5-45A5-A186-01F3684C87F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1994A12-89A5-45A5-A186-01F3684C87F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B73AC55-33B8-4399-9765-534B49409763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B73AC55-33B8-4399-9765-534B49409763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B73AC55-33B8-4399-9765-534B49409763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B73AC55-33B8-4399-9765-534B49409763}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

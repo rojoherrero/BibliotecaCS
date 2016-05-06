@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6F1A33CD-8692-45AB-BAD8-2A46C15D374E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{0B73AC55-33B8-4399-9765-534B49409763}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GestionBiblioteca</RootNamespace>
-    <AssemblyName>GestionBiblioteca</AssemblyName>
+    <RootNamespace>OpcionesMenu</RootNamespace>
+    <AssemblyName>OpcionesMenu</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,24 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="NuevoLibro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\EntidadLibro\LibreriaEntidades.csproj">
-      <Project>{be0e8f9b-80bb-4916-a685-fc48829e5196}</Project>
+      <Project>{BE0E8F9B-80BB-4916-A685-FC48829E5196}</Project>
       <Name>LibreriaEntidades</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ListarElementos\ListarElementos.csproj">
-      <Project>{E1994A12-89A5-45A5-A186-01F3684C87F3}</Project>
-      <Name>ListarElementos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpcionesMenu\OpcionesMenu.csproj">
-      <Project>{0b73ac55-33b8-4399-9765-534b49409763}</Project>
-      <Name>OpcionesMenu</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
