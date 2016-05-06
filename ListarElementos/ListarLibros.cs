@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace ListarElementos
 {
-    public class ListarLibros
+    public class OperacionesSobreLibros
     {
-
-        public void infoLibro(Dictionary<string, Libro> nombreDiccionario, string llave)
+        public static void InfoLibro(Dictionary<string, Libro> nombreDiccionario, string llave)
         {
             StringBuilder entradaInformacion = new StringBuilder();
             entradaInformacion.Append("Autor: ");
@@ -31,7 +30,7 @@ namespace ListarElementos
             Console.WriteLine(entradaInformacion.ToString());
         }
         
-        public void todosLosLibros(Dictionary<string, Libro> nombreDiccionario)
+        public static void ListarTodosLosLibros(Dictionary<string, Libro> nombreDiccionario)
         {
             StringBuilder cabecera = new StringBuilder();
             cabecera.Append("Autor");

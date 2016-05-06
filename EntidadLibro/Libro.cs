@@ -19,8 +19,19 @@ namespace LibreriaEntidades
     public class Prestamo
     {
         public string IsbnPrestado { get; set; }
-        public string nombreUsuario { get; set; }
+        public int IdUsuario { get; set; }
         public DateTime FechaInicioPrestamo  { get; set; }
         public DateTime FechaFinPrestamo { get; set; }
+    }
+
+    public class Usuario
+    {
+        public string Nombre { get; set; }
+        public string Apellidos { get; set; }
+        public int IdUsuario { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public string Direccion { get; set; }
+        public string Email { get; set; }
+        public int NumTelefMovil { get; set; }
     }
 }

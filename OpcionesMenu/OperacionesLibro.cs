@@ -55,13 +55,13 @@ namespace OpcionesMenu
 
         public static void ListarLibros(Dictionary<string, Libro> nombreDiccionario)
         {
-            ListarLibros listarLibros = new ListarLibros();
+            //ListarLibros listarLibros = new ListarLibros();
             // Listar todos los libros
             // TODO refactorizar listar todos los libros
             Console.Clear();
             Console.WriteLine("Has elegido listar todos los libros");
 
-            listarLibros.todosLosLibros(nombreDiccionario);
+            OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
 
             Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
             Console.ReadLine();
@@ -70,11 +70,10 @@ namespace OpcionesMenu
 
         public static void EliminarLibro(Dictionary<string, Libro> nombreDiccionario)
         {
-            ListarLibros listarLibros = new ListarLibros();
 
             Console.WriteLine("Has elegido eliminar un libro");
 
-            listarLibros.todosLosLibros(nombreDiccionario);
+            OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
 
             string isbnEliminar;
 
@@ -93,7 +92,7 @@ namespace OpcionesMenu
                 nombreDiccionario.Remove(isbnEliminar);
             }
 
-            listarLibros.todosLosLibros(nombreDiccionario);
+            OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
 
             Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
             Console.ReadLine();
@@ -102,7 +101,7 @@ namespace OpcionesMenu
 
         public static void ModificarLibro(Dictionary<string, Libro> nombreDiccionario)
         {
-            ListarLibros listarLibros = new ListarLibros();
+            OperacionesSobreLibros listarLibros = new OperacionesSobreLibros();
 
             bool seguirModificando = true;
 
@@ -111,11 +110,9 @@ namespace OpcionesMenu
                 // Modificar un libro
                 // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
 
-                ListarLibros infoLibro = new ListarLibros();
-
                 Console.WriteLine("Has elegido modificar un libro");
 
-                listarLibros.todosLosLibros(nombreDiccionario);
+                OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
 
                 string isbnModificar;
 
@@ -126,7 +123,7 @@ namespace OpcionesMenu
                     isbnModificar = Console.ReadLine();
                 } while (!nombreDiccionario.ContainsKey(isbnModificar));
 
-                infoLibro.infoLibro(nombreDiccionario, isbnModificar);
+                OperacionesSobreLibros.InfoLibro(nombreDiccionario, isbnModificar);
 
                 Console.WriteLine("¿Qué quiere modificar?");
                 string menuModificar = Console.ReadLine();
@@ -138,23 +135,23 @@ namespace OpcionesMenu
                         nombreDiccionario[isbnModificar].FechaPublicacion = DateTime.Parse(Console.ReadLine());
                         break;
                     case "Fecha de alta":
-                        Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA)");
+                        Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA): ");
                         nombreDiccionario[isbnModificar].FechaAlta = DateTime.Parse(Console.ReadLine());
                         break;
                     case "Ejemplares":
-                        Console.Write("Introduce una la cantidad de ejemplares que quieras");
+                        Console.Write("Introduce una la cantidad de ejemplares que quieras: ");
                         nombreDiccionario[isbnModificar].Ejemplares = int.Parse(Console.ReadLine());
                         break;
                     case "Autor":
-                        Console.Write("Introduce el nuevo autor");
+                        Console.Write("Introduce el nuevo autor: ");
                         nombreDiccionario[isbnModificar].Autor = Console.ReadLine();
                         break;
                     case "Titulo":
-                        Console.Write("Introduce el nuevo título");
+                        Console.Write("Introduce el nuevo título: ");
                         nombreDiccionario[isbnModificar].Titulo = Console.ReadLine();
                         break;
                     default:
-                        Console.WriteLine("Elige una opción válida");
+                        Console.WriteLine("Elige una opción válida: ");
                         menuModificar = Console.ReadLine();
                         break;
                 }

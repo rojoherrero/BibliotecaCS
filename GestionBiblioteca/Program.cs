@@ -20,7 +20,7 @@ namespace GestionBiblioteca
             Dictionary<string, Libro> diccionarioLibros = new Dictionary<string, Libro>();
 
             // Lo instancio aquí para poder acceder a listarLibros en cualquier momento
-            ListarLibros listarLibros = new ListarLibros();
+            OperacionesSobreLibros listarLibros = new OperacionesSobreLibros();
 
             // Sólo aparece al inicio de la aplicación
             Console.WriteLine("Maara tulda");
