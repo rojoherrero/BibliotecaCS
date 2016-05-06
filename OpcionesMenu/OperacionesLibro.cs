@@ -101,67 +101,79 @@ namespace OpcionesMenu
 
         public static void ModificarLibro(Dictionary<string, Libro> nombreDiccionario)
         {
-            OperacionesSobreLibros listarLibros = new OperacionesSobreLibros();
 
             bool seguirModificando = true;
 
-            while (seguirModificando)
+            if (nombreDiccionario.Count() != 0)
             {
-                // Modificar un libro
-                // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
+                OperacionesSobreLibros listarLibros = new OperacionesSobreLibros();
 
-                Console.WriteLine("Has elegido modificar un libro");
-
-                OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
-
-                string isbnModificar;
-
-                // TODO refactorizar la selección del libro por ISBN
-                do
+                while (seguirModificando)
                 {
-                    Console.WriteLine("Introduce el ISBN del libro que quieras modificar");
-                    isbnModificar = Console.ReadLine();
-                } while (!nombreDiccionario.ContainsKey(isbnModificar));
+                    // Modificar un libro
+                    // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
 
-                OperacionesSobreLibros.InfoLibro(nombreDiccionario, isbnModificar);
+                    Console.WriteLine("Has elegido modificar un libro");
 
-                Console.WriteLine("¿Qué quiere modificar?");
-                string menuModificar = Console.ReadLine();
+                    OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
 
-                switch (menuModificar)
-                {
-                    case "Fecha de publicacion":
-                        Console.Write("Introduce una nueva fecha de publicación (DD/MM/AAAA)");
-                        nombreDiccionario[isbnModificar].FechaPublicacion = DateTime.Parse(Console.ReadLine());
-                        break;
-                    case "Fecha de alta":
-                        Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA): ");
-                        nombreDiccionario[isbnModificar].FechaAlta = DateTime.Parse(Console.ReadLine());
-                        break;
-                    case "Ejemplares":
-                        Console.Write("Introduce una la cantidad de ejemplares que quieras: ");
-                        nombreDiccionario[isbnModificar].Ejemplares = int.Parse(Console.ReadLine());
-                        break;
-                    case "Autor":
-                        Console.Write("Introduce el nuevo autor: ");
-                        nombreDiccionario[isbnModificar].Autor = Console.ReadLine();
-                        break;
-                    case "Titulo":
-                        Console.Write("Introduce el nuevo título: ");
-                        nombreDiccionario[isbnModificar].Titulo = Console.ReadLine();
-                        break;
-                    default:
-                        Console.WriteLine("Elige una opción válida: ");
-                        menuModificar = Console.ReadLine();
-                        break;
+                    string isbnModificar;
+
+                    // TODO refactorizar la selección del libro por ISBN
+                    do
+                    {
+                        Console.WriteLine("Introduce el ISBN del libro que quieras modificar");
+                        isbnModificar = Console.ReadLine();
+                    } while (!nombreDiccionario.ContainsKey(isbnModificar));
+
+                    OperacionesSobreLibros.InfoLibro(nombreDiccionario, isbnModificar);
+
+                    Console.WriteLine("¿Qué quiere modificar? Introduce el número de la opción que quieres realizar");
+                    string menuModificar = Console.ReadLine();
+
+                    switch (menuModificar)
+                    {
+                        case "Fecha de publicacion":
+                            Console.Write("Introduce una nueva fecha de publicación (DD/MM/AAAA)");
+                            nombreDiccionario[isbnModificar].FechaPublicacion = DateTime.Parse(Console.ReadLine());
+                            break;
+                        case "Fecha de alta":
+                            Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA): ");
+                            nombreDiccionario[isbnModificar].FechaAlta = DateTime.Parse(Console.ReadLine());
+                            break;
+                        case "Ejemplares":
+                            Console.Write("Introduce una la cantidad de ejemplares que quieras: ");
+                            nombreDiccionario[isbnModificar].Ejemplares = int.Parse(Console.ReadLine());
+                            break;
+                        case "Autor":
+                            Console.Write("Introduce el nuevo autor: ");
+                            nombreDiccionario[isbnModificar].Autor = Console.ReadLine();
+                            break;
+                        case "Titulo":
+                            Console.Write("Introduce el nuevo título: ");
+                            nombreDiccionario[isbnModificar].Titulo = Console.ReadLine();
+                            break;
+                        default:
+                            Console.WriteLine("Elige una opción válida: ");
+                            menuModificar = Console.ReadLine();
+                            break;
+                    }
+
+                    Console.WriteLine("Quieres seguir?(S/N)");
+                    string respuesta = Console.ReadLine();
+                    if (respuesta.Equals("N") || respuesta.Equals("n"))
+                    {
+                        seguirModificando = false;
+                    }
                 }
 
-                Console.WriteLine("Quieres seguir?(S/N)");
-                string respuesta = Console.ReadLine();
-                if (respuesta.Equals("N") || respuesta.Equals("n"))
-                {
-                    seguirModificando = false;
-                }
+            }
+            else
+            {
+                Console.WriteLine("No hay ningún libro, así que no puede modificar nada");
+                Console.WriteLine("Pulsa cualquier tecla para continuar");
+                Console.ReadLine();
+                seguirModificando = false;
             }
         }
     }

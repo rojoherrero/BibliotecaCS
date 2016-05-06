@@ -12,19 +12,19 @@ namespace ListarElementos
         public static void InfoLibro(Dictionary<string, Libro> nombreDiccionario, string llave)
         {
             StringBuilder entradaInformacion = new StringBuilder();
-            entradaInformacion.Append("Autor: ");
+            entradaInformacion.Append("1) Autor: ");
             entradaInformacion.Append(nombreDiccionario[llave].Autor);
             entradaInformacion.Append("\n");
-            entradaInformacion.Append("Titulo: ");
+            entradaInformacion.Append("2) Titulo: ");
             entradaInformacion.Append(nombreDiccionario[llave].Titulo);
             entradaInformacion.Append("\n");
-            entradaInformacion.Append("Ejemplares: ");
+            entradaInformacion.Append("3) Ejemplares: ");
             entradaInformacion.Append(nombreDiccionario[llave].Ejemplares.ToString());
             entradaInformacion.Append("\n");
-            entradaInformacion.Append("Fecha de alta: ");
+            entradaInformacion.Append("4) Fecha de alta: ");
             entradaInformacion.Append(nombreDiccionario[llave].FechaAlta.ToShortDateString());
             entradaInformacion.Append("\n");
-            entradaInformacion.Append("Fecha de publicación: ");
+            entradaInformacion.Append("5) Fecha de publicación: ");
             entradaInformacion.Append(nombreDiccionario[llave].FechaPublicacion.ToShortDateString());
 
             Console.WriteLine(entradaInformacion.ToString());
