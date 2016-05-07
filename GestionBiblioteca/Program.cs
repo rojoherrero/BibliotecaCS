@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibreriaEntidades;
 using ListarElementos;
-using OpcionesMenu;
+using OpcionesMenuLibros;
 
 namespace GestionBiblioteca
 {

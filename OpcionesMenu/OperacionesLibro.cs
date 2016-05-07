@@ -3,10 +3,8 @@ using ListarElementos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpcionesMenu
+namespace OpcionesMenuLibros
 {
     public class OperacionesLibro
     {
@@ -43,8 +41,50 @@ namespace OpcionesMenu
                 libro.Titulo = Console.ReadLine();
                 Console.WriteLine("Introduce el autor del libro: ");
                 libro.Autor = Console.ReadLine();
-                Console.WriteLine("Introduce la fecha de publicación del libro.\nEl formato de la fecha tiene que ser el siguiente DD/MM/AAAA");
-                libro.FechaPublicacion = DateTime.Parse(Console.ReadLine());
+
+                //TODO rehacer el agregar la fecha de publicación para que no se pueda meter tonterias
+
+                bool fechaInvalida = true;
+
+                while (fechaInvalida)
+                {
+                    Console.WriteLine("Introduce el año de publicación del libro: ");
+                    string anoPublicacionString = Console.ReadLine();
+                    Console.WriteLine("Introduce el mes (número) de publicación del libro: ");
+                    string mesPublicacionString = Console.ReadLine();
+                    Console.WriteLine("Introduce el día de publicación del libro: ");
+                    string diaPublicacionString = Console.ReadLine();
+
+                    int anoPublicacion;
+                    int mesPublicacion;
+                    int diaPublicacion;
+
+                    if (int.TryParse(anoPublicacionString, out anoPublicacion) &&
+                        int.TryParse(mesPublicacionString, out mesPublicacion) &&
+                        int.TryParse(diaPublicacionString, out diaPublicacion))
+                    {
+                        if (Enumerable.Range(1500, DateTime.Now.Year).Contains(anoPublicacion) &&
+                        Enumerable.Range(1, 12).Contains(mesPublicacion) &&
+                        Enumerable.Range(1, 31).Contains(mesPublicacion))
+                        {
+                            libro.FechaPublicacion = new DateTime(anoPublicacion, mesPublicacion, diaPublicacion);
+                            fechaInvalida = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Has introducido fechas fuera de rango");
+                            Console.WriteLine("Pulsa cualquier tecla para volver a empezar");
+                            Console.ReadLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No has introducido número");
+                        Console.WriteLine("Pulsa cualquier tecla para volver a empezar");
+                        Console.ReadLine();
+                    }
+                }
+                
                 libro.FechaAlta = DateTime.Today;
                 libro.Ejemplares = 1;
 
@@ -90,10 +130,13 @@ namespace OpcionesMenu
             if (continuar.Equals("S") || continuar.Equals("s"))
             {
                 nombreDiccionario.Remove(isbnEliminar);
+                OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
             }
-
-            OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
-
+            else
+            {
+                Console.WriteLine("Operación abortada");
+            }
+            
             Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
             Console.ReadLine();
 
