@@ -29,5 +29,21 @@ namespace LibreriaEntidades
             Direccion = direccion;
             NumTelfMovil = numTelfMovil;
         }
+
+        public string MostarInfoTabulada()
+        {
+            StringBuilder informacion = new StringBuilder();
+            informacion.Append(IdUsuario);
+            informacion.Append("\t\t");
+            informacion.Append(Nombre);
+            informacion.Append("\t\t");
+            informacion.Append(FechaNacimiento);
+            informacion.Append("\t\t");
+            informacion.Append(Direccion);
+            informacion.Append("\t\t");
+            informacion.Append(NumTelfMovil);
+
+            return informacion.ToString();
+        }
     }
 }

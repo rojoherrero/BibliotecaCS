@@ -39,7 +39,7 @@ namespace ListarElementos
 
             foreach (Libro libro in nombreDiccionario.Values)
             {
-                Console.WriteLine(libro.MostrarInfoLibro());
+                Console.WriteLine(libro.MostrarInfoTabulada());
             }
         }
     }

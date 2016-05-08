@@ -32,7 +32,7 @@ namespace LibreriaEntidades
         {
         }
 
-        public string MostrarInfoLibro()
+        public string MostrarInfoTabulada()
         {
             StringBuilder informacion = new StringBuilder();
             informacion.Append(Autor);
