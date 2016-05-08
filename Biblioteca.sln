@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionBiblioteca", "Gestio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListarElementos", "ListarElementos\ListarElementos.csproj", "{E1994A12-89A5-45A5-A186-01F3684C87F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcionesMenu", "OpcionesMenu\OpcionesMenu.csproj", "{0B73AC55-33B8-4399-9765-534B49409763}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreriaMenuLibros", "OpcionesMenu\LibreriaMenuLibros.csproj", "{0B73AC55-33B8-4399-9765-534B49409763}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

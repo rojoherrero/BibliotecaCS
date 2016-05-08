@@ -58,9 +58,9 @@
       <Project>{E1994A12-89A5-45A5-A186-01F3684C87F3}</Project>
       <Name>ListarElementos</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpcionesMenu\OpcionesMenu.csproj">
+    <ProjectReference Include="..\OpcionesMenu\LibreriaMenuLibros.csproj">
       <Project>{0b73ac55-33b8-4399-9765-534b49409763}</Project>
-      <Name>OpcionesMenu</Name>
+      <Name>LibreriaMenuLibros</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

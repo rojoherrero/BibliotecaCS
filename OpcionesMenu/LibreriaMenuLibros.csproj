@@ -7,8 +7,8 @@
     <ProjectGuid>{0B73AC55-33B8-4399-9765-534B49409763}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpcionesMenu</RootNamespace>
-    <AssemblyName>OpcionesMenu</AssemblyName>
+    <RootNamespace>LibreriaMenuLibros</RootNamespace>
+    <AssemblyName>LibreriaMenuLibros</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OperacionesLibro.cs" />
+    <Compile Include="MetodosAuxiliares.cs" />
+    <Compile Include="MenuLibros.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +53,9 @@
       <Project>{E1994A12-89A5-45A5-A186-01F3684C87F3}</Project>
       <Name>ListarElementos</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

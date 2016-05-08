@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibreriaEntidades;
 using ListarElementos;
-using OpcionesMenuLibros;
+using LibreriaMenuLibros;
 
 namespace GestionBiblioteca
 {
@@ -45,7 +45,7 @@ namespace GestionBiblioteca
                         // Limpio la consola para no guarrearla mucho
                         Console.Clear();
 
-                        OperacionesLibro.NuevoLibro(diccionarioLibros);
+                        MenuLibros.NuevoLibro(diccionarioLibros);
 
                         Console.Clear();
 
@@ -56,7 +56,7 @@ namespace GestionBiblioteca
 
                         Console.Clear();
 
-                        OperacionesLibro.ListarLibros(diccionarioLibros);
+                        MenuLibros.ListarLibros(diccionarioLibros);
 
                         Console.Clear();
                         break;
@@ -66,7 +66,7 @@ namespace GestionBiblioteca
 
                         Console.Clear();
 
-                        OperacionesLibro.EliminarLibro(diccionarioLibros);
+                        MenuLibros.EliminarLibro(diccionarioLibros);
 
                         Console.Clear();
                         break;
@@ -77,7 +77,7 @@ namespace GestionBiblioteca
 
                         Console.Clear();
 
-                        OperacionesLibro.ModificarLibro(diccionarioLibros);
+                        MenuLibros.ModificarLibro(diccionarioLibros);
 
                         Console.Clear();
                                                                        

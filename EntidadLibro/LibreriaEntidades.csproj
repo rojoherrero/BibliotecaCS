@@ -7,8 +7,8 @@
     <ProjectGuid>{BE0E8F9B-80BB-4916-A685-FC48829E5196}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EntidadLibro</RootNamespace>
-    <AssemblyName>EntidadLibro</AssemblyName>
+    <RootNamespace>LibreriaEntidades</RootNamespace>
+    <AssemblyName>LibreriaEntidades</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

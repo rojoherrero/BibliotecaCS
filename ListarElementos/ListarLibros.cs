@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ListarElementos
 {
-    public class OperacionesSobreLibros
+    public class ListarLibros
     {
         public static void InfoLibro(Dictionary<string, Libro> nombreDiccionario, string llave)
         {

@@ -1,14 +1,13 @@
 ﻿using LibreriaEntidades;
-using ListarElementos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpcionesMenuLibros
+namespace LibreriaMenuLibros
 {
-    public class OperacionesLibro
+    public class MenuLibros
     {
-
+        
         public static void NuevoLibro(Dictionary<string, Libro> nombreDiccionario)
         {
 
@@ -17,21 +16,16 @@ namespace OpcionesMenuLibros
             string isbn = Console.ReadLine();
 
             // Compruebo que no este el ISBN guardado
+
             if (nombreDiccionario.ContainsKey(isbn))
             {
-                // Si el ISBN existe:
-                Console.WriteLine("El ISBN \"" + isbn + "\" ya existe.\npor lo que se ha aumentado en una unidad el número de ejemplares");
-                // Aumento el número de ejempalares en una unidad
-                nombreDiccionario[isbn].Ejemplares++;
-                // Informo del total de ejemplares
-                Console.WriteLine("El número total de ejemplares es: " + nombreDiccionario[isbn].Ejemplares);
-                Console.WriteLine("Pulsa cualquier tecla para continuar");
-                Console.ReadLine();
-
+                // Si el ISBN ya existe
+                MetodosAuxiliares.AumentarNumEjemplares(nombreDiccionario, isbn);
             }
             else
             {
-                // Como no existe el isbn en memoria, instancio un nuevo libro
+                //El ISBN no existe
+
                 Libro libro = new Libro();
 
                 // TODO intentar refactorizar menu principal
@@ -102,7 +96,7 @@ namespace OpcionesMenuLibros
             Console.Clear();
             Console.WriteLine("Has elegido listar todos los libros");
 
-            OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
+            ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
 
             Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
             Console.ReadLine();
@@ -114,7 +108,7 @@ namespace OpcionesMenuLibros
 
             Console.WriteLine("Has elegido eliminar un libro");
 
-            OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
+            ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
 
             string isbnEliminar;
 
@@ -131,7 +125,7 @@ namespace OpcionesMenuLibros
             if (continuar.Equals("S") || continuar.Equals("s"))
             {
                 nombreDiccionario.Remove(isbnEliminar);
-                OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
+                ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
             }
             else
             {
@@ -150,7 +144,7 @@ namespace OpcionesMenuLibros
 
             if (nombreDiccionario.Count() != 0)
             {
-                OperacionesSobreLibros listarLibros = new OperacionesSobreLibros();
+                ListarElementos.ListarLibros listarLibros = new ListarElementos.ListarLibros();
 
                 while (seguirModificando)
                 {
@@ -159,7 +153,7 @@ namespace OpcionesMenuLibros
 
                     Console.WriteLine("Has elegido modificar un libro");
 
-                    OperacionesSobreLibros.ListarTodosLosLibros(nombreDiccionario);
+                    ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
 
                     string isbnModificar;
 
@@ -169,7 +163,7 @@ namespace OpcionesMenuLibros
                         isbnModificar = Console.ReadLine();
                     } while (!nombreDiccionario.ContainsKey(isbnModificar));
 
-                    OperacionesSobreLibros.InfoLibro(nombreDiccionario, isbnModificar);
+                    ListarElementos.ListarLibros.InfoLibro(nombreDiccionario, isbnModificar);
 
                     Console.WriteLine("¿Qué quiere modificar? Introduce el número de la opción que quieres realizar");
                     string menuModificar = Console.ReadLine();
