@@ -11,6 +11,7 @@ namespace OpcionesMenuLibros
 
         public static void NuevoLibro(Dictionary<string, Libro> nombreDiccionario)
         {
+
             // Inicio la recogida de los datos para crear el nuevo libro
             Console.WriteLine("Introduce el ISBN del libro: ");
             string isbn = Console.ReadLine();
@@ -42,7 +43,7 @@ namespace OpcionesMenuLibros
                 Console.WriteLine("Introduce el autor del libro: ");
                 libro.Autor = Console.ReadLine();
 
-                //TODO rehacer el agregar la fecha de publicación para que no se pueda meter tonterias
+                //TODO refactorizar este proceso para poder usarlo en el menú de modificar libro
 
                 bool fechaInvalida = true;
 
@@ -64,8 +65,8 @@ namespace OpcionesMenuLibros
                         int.TryParse(diaPublicacionString, out diaPublicacion))
                     {
                         if (Enumerable.Range(1500, DateTime.Now.Year).Contains(anoPublicacion) &&
-                        Enumerable.Range(1, 12).Contains(mesPublicacion) &&
-                        Enumerable.Range(1, 31).Contains(mesPublicacion))
+                            Enumerable.Range(1, 12).Contains(mesPublicacion) &&
+                            Enumerable.Range(1, 31).Contains(mesPublicacion)) //TODO discriminar que meses tiene 30 ó 31 días
                         {
                             libro.FechaPublicacion = new DateTime(anoPublicacion, mesPublicacion, diaPublicacion);
                             fechaInvalida = false;
@@ -162,7 +163,6 @@ namespace OpcionesMenuLibros
 
                     string isbnModificar;
 
-                    // TODO refactorizar la selección del libro por ISBN
                     do
                     {
                         Console.WriteLine("Introduce el ISBN del libro que quieras modificar");

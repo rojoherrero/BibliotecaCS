@@ -14,17 +14,13 @@ namespace ListarElementos
             StringBuilder entradaInformacion = new StringBuilder();
             entradaInformacion.Append("1) Autor: ");
             entradaInformacion.Append(nombreDiccionario[llave].Autor);
-            entradaInformacion.Append("\n");
-            entradaInformacion.Append("2) Titulo: ");
+            entradaInformacion.Append("\n2) Titulo: ");
             entradaInformacion.Append(nombreDiccionario[llave].Titulo);
-            entradaInformacion.Append("\n");
-            entradaInformacion.Append("3) Ejemplares: ");
+            entradaInformacion.Append("\n3) Ejemplares: ");
             entradaInformacion.Append(nombreDiccionario[llave].Ejemplares.ToString());
-            entradaInformacion.Append("\n");
-            entradaInformacion.Append("4) Fecha de alta: ");
+            entradaInformacion.Append("\n4) Fecha de alta: ");
             entradaInformacion.Append(nombreDiccionario[llave].FechaAlta.ToShortDateString());
-            entradaInformacion.Append("\n");
-            entradaInformacion.Append("5) Fecha de publicación: ");
+            entradaInformacion.Append("\n5) Fecha de publicación: ");
             entradaInformacion.Append(nombreDiccionario[llave].FechaPublicacion.ToShortDateString());
 
             Console.WriteLine(entradaInformacion.ToString());
@@ -33,34 +29,17 @@ namespace ListarElementos
         public static void ListarTodosLosLibros(Dictionary<string, Libro> nombreDiccionario)
         {
             StringBuilder cabecera = new StringBuilder();
-            cabecera.Append("Autor");
-            cabecera.Append("\t\t");
-            cabecera.Append("Título");
-            cabecera.Append("\t\t");
-            cabecera.Append("ISBN");
-            cabecera.Append("\t\t");
-            cabecera.Append("Ejemplares");
-            cabecera.Append("\t\t");
-            cabecera.Append("Fecha de alta");
-            cabecera.Append("\t\t");
-            cabecera.Append("Publicación");
+            cabecera.Append("Autor\t\t");
+            cabecera.Append("Título\t\t");
+            cabecera.Append("ISBN\t\t");
+            cabecera.Append("Ejemplares\t\t");
+            cabecera.Append("Fecha de alta\t\t");
+            cabecera.Append("Publicación\t\t");
             Console.WriteLine(cabecera);
 
             foreach (Libro libro in nombreDiccionario.Values)
             {
-                StringBuilder libroPorPantalla = new StringBuilder();
-                libroPorPantalla.Append(libro.Autor);
-                libroPorPantalla.Append("\t\t");
-                libroPorPantalla.Append(libro.Titulo);
-                libroPorPantalla.Append("\t\t");
-                libroPorPantalla.Append(libro.ISBN);
-                libroPorPantalla.Append("\t\t");
-                libroPorPantalla.Append(libro.Ejemplares);
-                libroPorPantalla.Append("\t\t");
-                libroPorPantalla.Append(libro.FechaAlta.ToShortDateString());
-                libroPorPantalla.Append("\t\t");
-                libroPorPantalla.Append(libro.FechaPublicacion.ToShortDateString());
-                Console.WriteLine(libroPorPantalla);
+                Console.WriteLine(libro.MostrarInfoLibro());
             }
         }
     }
