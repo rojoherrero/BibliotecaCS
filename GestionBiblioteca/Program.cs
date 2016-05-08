@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntitiesLibrary;
+using EntitiesApi;
 using ListarElementos;
-using HelpingMethodsLibrary;
+using BookMenuApi;
 
 namespace LibraryManagement
 {
@@ -14,33 +14,32 @@ namespace LibraryManagement
         static void Main(string[] args)
         {
             // Esta variable es la que controla si se quiere salir de la aplicación
-            bool seguir = true;
+            bool follow = true;
 
             // Instancio un MenuLibros para poder acceder a el desde cualquier sitio
-            MenuLibros menuLibros = new MenuLibros();
+            BookMenu bookmenu = new BookMenu();
 
             // Diccionario en el que se guardan los libros 
-            Dictionary<string, Book> diccionarioLibros = new Dictionary<string, Book>();
+            Dictionary<string, Book> bookDictionary = new Dictionary<string, Book>();
 
             // Sólo aparece al inicio de la aplicación
             HelpingMethodsApi.WelcomeMessage();
             
-            while (seguir)
+            while (follow)
             {
                 // Menú con las opciones disponibles
                 HelpingMethodsApi.RenderAllAvailableOptions();
-                string opcion = Console.ReadLine();
+                string opionn = Console.ReadLine();
 
-                switch (opcion)
+                switch (opionn)
                 {
                     // Añadir Libro
 
                     case "1":
                         // Limpio la consola para no guarrearla mucho
+
                         Console.Clear();
-
-                        menuLibros.NuevoLibro(diccionarioLibros);
-
+                        bookmenu.NewBook(bookDictionary);
                         Console.Clear();
 
                         break;
@@ -49,9 +48,7 @@ namespace LibraryManagement
                         // Listar todos los libros
 
                         Console.Clear();
-
-                        menuLibros.ListarLibros(diccionarioLibros);
-
+                        bookmenu.ShowAllBooks(bookDictionary);
                         Console.Clear();
                         break;
 
@@ -59,9 +56,7 @@ namespace LibraryManagement
                         // Eliminar un libro(
 
                         Console.Clear();
-
-                        menuLibros.EliminarLibro(diccionarioLibros);
-
+                        bookmenu.DeleteBook(bookDictionary);
                         Console.Clear();
                         break;
 
@@ -70,19 +65,16 @@ namespace LibraryManagement
                         // Modificar Libro
 
                         Console.Clear();
-
-                        menuLibros.ModificarLibro(diccionarioLibros);
-
+                        bookmenu.ModifyBook(bookDictionary);
                         Console.Clear();
                                                                        
                         break;
 
                     case "5":
                         // Salir
-                        seguir = false;
 
+                        follow = false;
                         HelpingMethodsApi.PartingMessge();
-
                         Console.ReadLine();
                         break;
                     default:

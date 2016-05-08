@@ -58,7 +58,7 @@ namespace BookMenuApi
             }
         }
 
-        public void ListarLibros(Dictionary<string, Book> DictionaryName)
+        public void ShowAllBooks(Dictionary<string, Book> DictionaryName)
         {
             //ListarLibros listarLibros = new ListarLibros();
             // Listar todos los libros
@@ -73,7 +73,7 @@ namespace BookMenuApi
 
         }
 
-        public void EliminarLibro(Dictionary<string, Book> DictionaryName)
+        public void DeleteBook(Dictionary<string, Book> DictionaryName)
         {
 
             Console.WriteLine("Has elegido eliminar un libro");
@@ -107,68 +107,68 @@ namespace BookMenuApi
 
         }
 
-        public void ModificarLibro(Dictionary<string, Book> nombreDiccionario)
+        public void ModifyBook(Dictionary<string, Book> dictionaryName)
         {
 
-            bool seguirModificando = true;
+            bool keepModifying = true;
 
-            if (nombreDiccionario.Count() != 0)
+            if (dictionaryName.Count() != 0)
             {
                 ListarElementos.ListarLibros listarLibros = new ListarElementos.ListarLibros();
 
-                while (seguirModificando)
+                while (keepModifying)
                 {
                     // Modificar un libro
                     // TODO una vez funcione todo, refactorizar la funcionalidad de modificar
 
                     Console.WriteLine("Has elegido modificar un libro");
 
-                    ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
+                    ListarElementos.ListarLibros.ListarTodosLosLibros(dictionaryName);
 
-                    string isbnModificar;
+                    string isbnToModify;
 
                     do
                     {
                         Console.WriteLine("Introduce el ISBN del libro que quieras modificar");
-                        isbnModificar = Console.ReadLine();
-                    } while (!nombreDiccionario.ContainsKey(isbnModificar));
+                        isbnToModify = Console.ReadLine();
+                    } while (!dictionaryName.ContainsKey(isbnToModify));
 
-                    ListarElementos.ListarLibros.InfoLibro(nombreDiccionario, isbnModificar);
+                    ListarElementos.ListarLibros.InfoLibro(dictionaryName, isbnToModify);
 
                     Console.WriteLine("¿Qué quiere modificar? Introduce el número de la opción que quieres realizar");
-                    string menuModificar = Console.ReadLine();
+                    string actionToDo = Console.ReadLine();
 
-                    switch (menuModificar)
+                    switch (actionToDo)
                     {
                         case "Fecha de publicacion":
                             Console.Write("Introduce una nueva fecha de publicación (DD/MM/AAAA)");
-                            nombreDiccionario[isbnModificar].PublishDate = DateTime.Parse(Console.ReadLine());
+                            dictionaryName[isbnToModify].PublishDate = DateTime.Parse(Console.ReadLine());
                             break;
                         case "Fecha de alta":
                             Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA): ");
-                            nombreDiccionario[isbnModificar].EntryDate = DateTime.Parse(Console.ReadLine());
+                            dictionaryName[isbnToModify].EntryDate = DateTime.Parse(Console.ReadLine());
                             break;
                         case "Ejemplares":
                             Console.Write("Introduce una la cantidad de ejemplares que quieras: ");
-                            nombreDiccionario[isbnModificar].Copies = int.Parse(Console.ReadLine());
+                            dictionaryName[isbnToModify].Copies = int.Parse(Console.ReadLine());
                             break;
                         case "Autor":
-                            nombreDiccionario[isbnModificar].Author = HelpingMethods.SetAuthor();
+                            dictionaryName[isbnToModify].Author = HelpingMethods.SetAuthor();
                             break;
                         case "Titulo":
-                            nombreDiccionario[isbnModificar].Title = HelpingMethods.SetTitle();
+                            dictionaryName[isbnToModify].Title = HelpingMethods.SetTitle();
                             break;
                         default:
                             Console.WriteLine("Elige una opción válida: ");
-                            menuModificar = Console.ReadLine();
+                            actionToDo = Console.ReadLine();
                             break;
                     }
 
                     Console.WriteLine("Quieres seguir?(S/N)");
-                    string respuesta = Console.ReadLine();
-                    if (respuesta.Equals("N") || respuesta.Equals("n"))
+                    string answer = Console.ReadLine();
+                    if (answer.Equals("N") || answer.Equals("n"))
                     {
-                        seguirModificando = false;
+                        keepModifying = false;
                     }
                 }
 
@@ -178,7 +178,7 @@ namespace BookMenuApi
                 Console.WriteLine("No hay ningún libro, así que no puede modificar nada");
                 Console.WriteLine("Pulsa cualquier tecla para continuar");
                 Console.ReadLine();
-                seguirModificando = false;
+                keepModifying = false;
             }
         }
     }
