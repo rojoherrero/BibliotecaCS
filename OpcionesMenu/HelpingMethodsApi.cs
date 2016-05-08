@@ -1,48 +1,48 @@
-﻿using LibreriaEntidades;
+﻿using EntitiesApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibreriaMenuLibros
+namespace BookMenuApi
 {
-    internal class MetodosAuxiliares
+    internal class HelpingMethods
     {
-        public static void AumentarNumEjemplares(Dictionary<string, Libro> nombreDiccionario, string isbn)
+        public static void OneMoreBookCopy(Dictionary<string, Book> DictionaryName, string isbn)
         {
             // Si el ISBN existe:
-            Console.WriteLine(AvisoIsbnRepetido(isbn));
+            Console.WriteLine(RepeatedIsbnWarning(isbn));
             // Aumento el número de ejempalares en una unidad
-            nombreDiccionario[isbn].Ejemplares++;
+            DictionaryName[isbn].Copies++;
             // Informo del total de ejemplares
-            Console.WriteLine(AvisoAumentoEjemplares(nombreDiccionario, isbn));
+            Console.WriteLine(OneMoreCopyWarning(DictionaryName, isbn));
             Console.WriteLine("Pulsa cualquier tecla para continuar");
             Console.ReadLine();
         }
 
-        public static string RecogerIsbn()
+        public static string SetIsbn()
         {
             Console.WriteLine("Introduce el ISBN del libro: ");
             string isbn = Console.ReadLine();
             return isbn;
         }
 
-        public static string RecogerTitulo()
+        public static string SetTitle()
         {
             Console.WriteLine("Introduce el titulo del libro: ");
-            string titulo = Console.ReadLine();
-            return titulo;
+            string title = Console.ReadLine();
+            return title;
         }
 
-        public static string RecogerAutor()
+        public static string SetAuthor()
         {
             Console.WriteLine("Introduce el autor del libro: ");
-            string autor = Console.ReadLine();
-            return autor;
+            string author = Console.ReadLine();
+            return author;
         }
 
-        public static int RecogerAnoPublicacion()
+        public static int SetPublishYear()
         {
             int returnYear;
             bool validYear = false;
@@ -55,19 +55,20 @@ namespace LibreriaMenuLibros
             return returnYear;
         }
 
-        public static int RecogerMesPublicacion()
+        public static int SetPublishMOnth()
         {
             int returnMonth;
             bool validMonth = false;
             do
             {
                 Console.WriteLine("Introduce el mes (número) de publicación del libro: ");
-                validMonth = !int.TryParse(Console.ReadLine(), out returnMonth);
+                validMonth = !int.TryParse(Console.ReadLine(), out returnMonth)
+                    && !Enumerable.Range(1,13).Contains(returnMonth);
             } while (validMonth);        
             return returnMonth;
         }
 
-        public static int RecogerDiaPublicacion()
+        public static int SetPublishDay()
         {
             int returnDay;
             bool validDay = false;
@@ -79,23 +80,23 @@ namespace LibreriaMenuLibros
             return returnDay;
         }
 
-        private static string AvisoIsbnRepetido(string isbn)
+        private static string RepeatedIsbnWarning(string isbn)
         {
-            StringBuilder informacion = new StringBuilder();
-            informacion.Append("El ISBN \"");
-            informacion.Append(isbn);
-            informacion.Append("\" ya existe.\npor lo que se ha aumentado en una unidad el número de ejemplares");
+            StringBuilder message = new StringBuilder();
+            message.Append("El ISBN \"");
+            message.Append(isbn);
+            message.Append("\" ya existe.\npor lo que se ha aumentado en una unidad el número de ejemplares");
 
-            return informacion.ToString();
+            return message.ToString();
         }
 
-        private static string AvisoAumentoEjemplares(Dictionary<string, Libro> nombreDiccionario, string isbn)
+        private static string OneMoreCopyWarning(Dictionary<string, Book> nombreDiccionario, string isbn)
         {
-            StringBuilder informacion = new StringBuilder();
-            informacion.Append("El número total de ejemplares es: ");
-            informacion.Append(nombreDiccionario[isbn].Ejemplares);
+            StringBuilder message = new StringBuilder();
+            message.Append("El número total de ejemplares es: ");
+            message.Append(nombreDiccionario[isbn].Copies);
 
-            return informacion.ToString();
+            return message.ToString();
         }
     }
 }

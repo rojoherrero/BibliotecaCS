@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BE0E8F9B-80BB-4916-A685-FC48829E5196}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{6F1A33CD-8692-45AB-BAD8-2A46C15D374E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibreriaEntidades</RootNamespace>
-    <AssemblyName>LibreriaEntidades</AssemblyName>
+    <RootNamespace>LibraryManagement</RootNamespace>
+    <AssemblyName>LibraryManagement</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,10 +43,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Prestamo.cs" />
-    <Compile Include="Libro.cs" />
+    <Compile Include="HelpingMethodsLibrary.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Usuario.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntidadLibro\EntitiesApi.csproj">
+      <Project>{be0e8f9b-80bb-4916-a685-fc48829e5196}</Project>
+      <Name>EntitiesApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListarElementos\ListarElementos.csproj">
+      <Project>{E1994A12-89A5-45A5-A186-01F3684C87F3}</Project>
+      <Name>ListarElementos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpcionesMenu\LibreriaMenuLibros.csproj">
+      <Project>{0b73ac55-33b8-4399-9765-534b49409763}</Project>
+      <Name>LibreriaMenuLibros</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

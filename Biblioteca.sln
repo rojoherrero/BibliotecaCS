@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreriaEntidades", "EntidadLibro\LibreriaEntidades.csproj", "{BE0E8F9B-80BB-4916-A685-FC48829E5196}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntitiesApi", "EntidadLibro\EntitiesApi.csproj", "{BE0E8F9B-80BB-4916-A685-FC48829E5196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionBiblioteca", "GestionBiblioteca\GestionBiblioteca.csproj", "{6F1A33CD-8692-45AB-BAD8-2A46C15D374E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagement", "GestionBiblioteca\LibraryManagement.csproj", "{6F1A33CD-8692-45AB-BAD8-2A46C15D374E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListarElementos", "ListarElementos\ListarElementos.csproj", "{E1994A12-89A5-45A5-A186-01F3684C87F3}"
 EndProject

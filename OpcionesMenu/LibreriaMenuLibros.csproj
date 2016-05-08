@@ -7,8 +7,8 @@
     <ProjectGuid>{0B73AC55-33B8-4399-9765-534B49409763}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibreriaMenuLibros</RootNamespace>
-    <AssemblyName>LibreriaMenuLibros</AssemblyName>
+    <RootNamespace>BookMenuApi</RootNamespace>
+    <AssemblyName>BookMenuApi</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MetodosAuxiliares.cs" />
-    <Compile Include="MenuLibros.cs" />
+    <Compile Include="HelpingMethodsApi.cs" />
+    <Compile Include="BookMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EntidadLibro\LibreriaEntidades.csproj">
+    <ProjectReference Include="..\EntidadLibro\EntitiesApi.csproj">
       <Project>{BE0E8F9B-80BB-4916-A685-FC48829E5196}</Project>
-      <Name>LibreriaEntidades</Name>
+      <Name>EntitiesApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\ListarElementos\ListarElementos.csproj">
       <Project>{E1994A12-89A5-45A5-A186-01F3684C87F3}</Project>

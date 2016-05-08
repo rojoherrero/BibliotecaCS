@@ -1,57 +1,64 @@
-﻿using LibreriaEntidades;
+﻿using EntitiesApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LibreriaMenuLibros
+namespace BookMenuApi
 {
-    public class MenuLibros
+    public class BookMenu
     {
         
-        public void NuevoLibro(Dictionary<string, Libro> nombreDiccionario)
+        public void NewBook(Dictionary<string, Book> DictionaryName)
         {
             string isbn;
 
             // Inicio la recogida de los datos para crear el nuevo libro
 
-            isbn = MetodosAuxiliares.RecogerIsbn();
+            isbn = HelpingMethods.SetIsbn();
 
 
             // Compruebo que no este el ISBN guardado
 
-            if (nombreDiccionario.ContainsKey(isbn))
+            if (DictionaryName.ContainsKey(isbn))
             {
                 // Si el ISBN ya existe
-                MetodosAuxiliares.AumentarNumEjemplares(nombreDiccionario, isbn);
+                HelpingMethods.OneMoreBookCopy(DictionaryName, isbn);
             }
             else
             {
                 //El ISBN no existe
 
-                Libro libro = new Libro();
+                Book book = new Book();
 
                 // TODO intentar refactorizar menu principal
 
                 // Recogo los datos del libro y lo guardo en un libro nuevo
-                libro.ISBN = isbn;
-                libro.Titulo = MetodosAuxiliares.RecogerTitulo();
-                libro.Autor = MetodosAuxiliares.RecogerAutor();
+                book.ISBN = isbn;
+                book.Title = HelpingMethods.SetTitle();
+                book.Author = HelpingMethods.SetAuthor();
 
-                int anoPublicacion = MetodosAuxiliares.RecogerAnoPublicacion();
-                int mesPublicacion = MetodosAuxiliares.RecogerMesPublicacion();
-                int diaPublicacion = MetodosAuxiliares.RecogerDiaPublicacion();
+                try
+                {
+                    book.PublishDate = new DateTime(HelpingMethods.SetPublishYear(),
+                                HelpingMethods.SetPublishMOnth(),
+                                HelpingMethods.SetPublishDay());
+                }
+                finally
+                {
+                    Console.WriteLine("Has introducido algún dato erroneo");
+                    Console.WriteLine("Se ha asignado como fecha de publicación el día de hoy");
+                    book.PublishDate = DateTime.Today;
+                }
 
-                libro.FechaPublicacion = new DateTime(anoPublicacion, mesPublicacion, diaPublicacion);
-
-                libro.FechaAlta = DateTime.Today;
-                libro.Ejemplares = 1;
+                book.EntryDate = DateTime.Today;
+                book.Copies = 1;
 
                 // añado el libro al diccionario
-                nombreDiccionario.Add(isbn, libro);
+                DictionaryName.Add(isbn, book);
             }
         }
 
-        public void ListarLibros(Dictionary<string, Libro> nombreDiccionario)
+        public void ListarLibros(Dictionary<string, Book> DictionaryName)
         {
             //ListarLibros listarLibros = new ListarLibros();
             // Listar todos los libros
@@ -59,36 +66,36 @@ namespace LibreriaMenuLibros
             Console.Clear();
             Console.WriteLine("Has elegido listar todos los libros");
 
-            ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
+            ListarElementos.ListarLibros.ListarTodosLosLibros(DictionaryName);
 
             Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
             Console.ReadLine();
 
         }
 
-        public void EliminarLibro(Dictionary<string, Libro> nombreDiccionario)
+        public void EliminarLibro(Dictionary<string, Book> DictionaryName)
         {
 
             Console.WriteLine("Has elegido eliminar un libro");
 
-            ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
+            ListarElementos.ListarLibros.ListarTodosLosLibros(DictionaryName);
 
-            string isbnEliminar;
+            string isbnToDelete;
 
             // TODO refactorizar la selección del libro por ISBN
             do
             {
                 Console.WriteLine("Introduce el ISBN del libro que quieras eliminar");
-                isbnEliminar = Console.ReadLine();
-            } while (!nombreDiccionario.ContainsKey(isbnEliminar));
+                isbnToDelete = Console.ReadLine();
+            } while (!DictionaryName.ContainsKey(isbnToDelete));
 
             Console.WriteLine("Estás seguro? (S/N)");
             string continuar = Console.ReadLine();
 
             if (continuar.Equals("S") || continuar.Equals("s"))
             {
-                nombreDiccionario.Remove(isbnEliminar);
-                ListarElementos.ListarLibros.ListarTodosLosLibros(nombreDiccionario);
+                DictionaryName.Remove(isbnToDelete);
+                ListarElementos.ListarLibros.ListarTodosLosLibros(DictionaryName);
             }
             else
             {
@@ -100,7 +107,7 @@ namespace LibreriaMenuLibros
 
         }
 
-        public void ModificarLibro(Dictionary<string, Libro> nombreDiccionario)
+        public void ModificarLibro(Dictionary<string, Book> nombreDiccionario)
         {
 
             bool seguirModificando = true;
@@ -135,21 +142,21 @@ namespace LibreriaMenuLibros
                     {
                         case "Fecha de publicacion":
                             Console.Write("Introduce una nueva fecha de publicación (DD/MM/AAAA)");
-                            nombreDiccionario[isbnModificar].FechaPublicacion = DateTime.Parse(Console.ReadLine());
+                            nombreDiccionario[isbnModificar].PublishDate = DateTime.Parse(Console.ReadLine());
                             break;
                         case "Fecha de alta":
                             Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA): ");
-                            nombreDiccionario[isbnModificar].FechaAlta = DateTime.Parse(Console.ReadLine());
+                            nombreDiccionario[isbnModificar].EntryDate = DateTime.Parse(Console.ReadLine());
                             break;
                         case "Ejemplares":
                             Console.Write("Introduce una la cantidad de ejemplares que quieras: ");
-                            nombreDiccionario[isbnModificar].Ejemplares = int.Parse(Console.ReadLine());
+                            nombreDiccionario[isbnModificar].Copies = int.Parse(Console.ReadLine());
                             break;
                         case "Autor":
-                            nombreDiccionario[isbnModificar].Autor = MetodosAuxiliares.RecogerAutor();
+                            nombreDiccionario[isbnModificar].Author = HelpingMethods.SetAuthor();
                             break;
                         case "Titulo":
-                            nombreDiccionario[isbnModificar].Titulo = MetodosAuxiliares.RecogerTitulo();
+                            nombreDiccionario[isbnModificar].Title = HelpingMethods.SetTitle();
                             break;
                         default:
                             Console.WriteLine("Elige una opción válida: ");

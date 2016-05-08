@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LibreriaEntidades;
+using EntitiesLibrary;
 using ListarElementos;
-using LibreriaMenuLibros;
+using HelpingMethodsLibrary;
 
-namespace GestionBiblioteca
+namespace LibraryManagement
 {
     class Program
     {
@@ -20,15 +20,15 @@ namespace GestionBiblioteca
             MenuLibros menuLibros = new MenuLibros();
 
             // Diccionario en el que se guardan los libros 
-            Dictionary<string, Libro> diccionarioLibros = new Dictionary<string, Libro>();
+            Dictionary<string, Book> diccionarioLibros = new Dictionary<string, Book>();
 
             // Sólo aparece al inicio de la aplicación
-            MetodosAuxiliares.MensajeBienvenida();
+            HelpingMethodsApi.WelcomeMessage();
             
             while (seguir)
             {
                 // Menú con las opciones disponibles
-                MetodosAuxiliares.PintarTodasLasOpciones();
+                HelpingMethodsApi.RenderAllAvailableOptions();
                 string opcion = Console.ReadLine();
 
                 switch (opcion)
@@ -81,13 +81,13 @@ namespace GestionBiblioteca
                         // Salir
                         seguir = false;
 
-                        MetodosAuxiliares.MensajeDespedida();
+                        HelpingMethodsApi.PartingMessge();
 
                         Console.ReadLine();
                         break;
                     default:
 
-                        MetodosAuxiliares.MensajeOpcionNoValida();
+                        HelpingMethodsApi.NonValidOptionMessage();
                         Console.ReadLine();
                         Console.Clear();
                         break;
