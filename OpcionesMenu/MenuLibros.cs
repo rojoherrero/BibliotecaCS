@@ -8,12 +8,14 @@ namespace LibreriaMenuLibros
     public class MenuLibros
     {
         
-        public static void NuevoLibro(Dictionary<string, Libro> nombreDiccionario)
+        public void NuevoLibro(Dictionary<string, Libro> nombreDiccionario)
         {
+            string isbn;
 
             // Inicio la recogida de los datos para crear el nuevo libro
-            Console.WriteLine("Introduce el ISBN del libro: ");
-            string isbn = Console.ReadLine();
+
+            isbn = MetodosAuxiliares.RecogerIsbn();
+
 
             // Compruebo que no este el ISBN guardado
 
@@ -32,54 +34,15 @@ namespace LibreriaMenuLibros
 
                 // Recogo los datos del libro y lo guardo en un libro nuevo
                 libro.ISBN = isbn;
-                Console.WriteLine("Introduce el titulo del libro: ");
-                libro.Titulo = Console.ReadLine();
-                Console.WriteLine("Introduce el autor del libro: ");
-                libro.Autor = Console.ReadLine();
+                libro.Titulo = MetodosAuxiliares.RecogerTitulo();
+                libro.Autor = MetodosAuxiliares.RecogerAutor();
 
-                //TODO refactorizar este proceso para poder usarlo en el menú de modificar libro
+                int anoPublicacion = MetodosAuxiliares.RecogerAnoPublicacion();
+                int mesPublicacion = MetodosAuxiliares.RecogerMesPublicacion();
+                int diaPublicacion = MetodosAuxiliares.RecogerDiaPublicacion();
 
-                bool fechaInvalida = true;
+                libro.FechaPublicacion = new DateTime(anoPublicacion, mesPublicacion, diaPublicacion);
 
-                while (fechaInvalida)
-                {
-                    Console.WriteLine("Introduce el año de publicación del libro: ");
-                    string anoPublicacionString = Console.ReadLine();
-                    Console.WriteLine("Introduce el mes (número) de publicación del libro: ");
-                    string mesPublicacionString = Console.ReadLine();
-                    Console.WriteLine("Introduce el día de publicación del libro: ");
-                    string diaPublicacionString = Console.ReadLine();
-
-                    int anoPublicacion;
-                    int mesPublicacion;
-                    int diaPublicacion;
-
-                    if (int.TryParse(anoPublicacionString, out anoPublicacion) &&
-                        int.TryParse(mesPublicacionString, out mesPublicacion) &&
-                        int.TryParse(diaPublicacionString, out diaPublicacion))
-                    {
-                        if (Enumerable.Range(1500, DateTime.Now.Year).Contains(anoPublicacion) &&
-                            Enumerable.Range(1, 12).Contains(mesPublicacion) &&
-                            Enumerable.Range(1, 31).Contains(mesPublicacion)) //TODO discriminar que meses tiene 30 ó 31 días
-                        {
-                            libro.FechaPublicacion = new DateTime(anoPublicacion, mesPublicacion, diaPublicacion);
-                            fechaInvalida = false;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Has introducido fechas fuera de rango");
-                            Console.WriteLine("Pulsa cualquier tecla para volver a empezar");
-                            Console.ReadLine();
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("No has introducido número");
-                        Console.WriteLine("Pulsa cualquier tecla para volver a empezar");
-                        Console.ReadLine();
-                    }
-                }
-                
                 libro.FechaAlta = DateTime.Today;
                 libro.Ejemplares = 1;
 
@@ -88,7 +51,7 @@ namespace LibreriaMenuLibros
             }
         }
 
-        public static void ListarLibros(Dictionary<string, Libro> nombreDiccionario)
+        public void ListarLibros(Dictionary<string, Libro> nombreDiccionario)
         {
             //ListarLibros listarLibros = new ListarLibros();
             // Listar todos los libros
@@ -103,7 +66,7 @@ namespace LibreriaMenuLibros
 
         }
 
-        public static void EliminarLibro(Dictionary<string, Libro> nombreDiccionario)
+        public void EliminarLibro(Dictionary<string, Libro> nombreDiccionario)
         {
 
             Console.WriteLine("Has elegido eliminar un libro");
@@ -137,7 +100,7 @@ namespace LibreriaMenuLibros
 
         }
 
-        public static void ModificarLibro(Dictionary<string, Libro> nombreDiccionario)
+        public void ModificarLibro(Dictionary<string, Libro> nombreDiccionario)
         {
 
             bool seguirModificando = true;
@@ -183,12 +146,10 @@ namespace LibreriaMenuLibros
                             nombreDiccionario[isbnModificar].Ejemplares = int.Parse(Console.ReadLine());
                             break;
                         case "Autor":
-                            Console.Write("Introduce el nuevo autor: ");
-                            nombreDiccionario[isbnModificar].Autor = Console.ReadLine();
+                            nombreDiccionario[isbnModificar].Autor = MetodosAuxiliares.RecogerAutor();
                             break;
                         case "Titulo":
-                            Console.Write("Introduce el nuevo título: ");
-                            nombreDiccionario[isbnModificar].Titulo = Console.ReadLine();
+                            nombreDiccionario[isbnModificar].Titulo = MetodosAuxiliares.RecogerTitulo();
                             break;
                         default:
                             Console.WriteLine("Elige una opción válida: ");

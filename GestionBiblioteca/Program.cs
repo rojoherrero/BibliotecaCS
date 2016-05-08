@@ -16,26 +16,20 @@ namespace GestionBiblioteca
             // Esta variable es la que controla si se quiere salir de la aplicación
             bool seguir = true;
 
+            // Instancio un MenuLibros para poder acceder a el desde cualquier sitio
+            MenuLibros menuLibros = new MenuLibros();
+
             // Diccionario en el que se guardan los libros 
             Dictionary<string, Libro> diccionarioLibros = new Dictionary<string, Libro>();
 
             // Sólo aparece al inicio de la aplicación
-            Console.WriteLine("Maara tulda");
-            Console.WriteLine("Gestión de la biblioteca de Rivendel");
+            MetodosAuxiliares.MensajeBienvenida();
             
             while (seguir)
             {
                 // Menú con las opciones disponibles
-                Console.WriteLine("Menú de la aplicación");
-                Console.WriteLine("1) Añadir Libro");
-                Console.WriteLine("2) Listar Libros");
-                Console.WriteLine("3) Eliminar Libro");
-                Console.WriteLine("4) Modificar Libro");
-                Console.WriteLine("5) Salir");
-
-                Console.Write("Introduzca el número de la opción que desea realizar: ");
+                MetodosAuxiliares.PintarTodasLasOpciones();
                 string opcion = Console.ReadLine();
-
 
                 switch (opcion)
                 {
@@ -45,7 +39,7 @@ namespace GestionBiblioteca
                         // Limpio la consola para no guarrearla mucho
                         Console.Clear();
 
-                        MenuLibros.NuevoLibro(diccionarioLibros);
+                        menuLibros.NuevoLibro(diccionarioLibros);
 
                         Console.Clear();
 
@@ -56,7 +50,7 @@ namespace GestionBiblioteca
 
                         Console.Clear();
 
-                        MenuLibros.ListarLibros(diccionarioLibros);
+                        menuLibros.ListarLibros(diccionarioLibros);
 
                         Console.Clear();
                         break;
@@ -66,7 +60,7 @@ namespace GestionBiblioteca
 
                         Console.Clear();
 
-                        MenuLibros.EliminarLibro(diccionarioLibros);
+                        menuLibros.EliminarLibro(diccionarioLibros);
 
                         Console.Clear();
                         break;
@@ -77,7 +71,7 @@ namespace GestionBiblioteca
 
                         Console.Clear();
 
-                        MenuLibros.ModificarLibro(diccionarioLibros);
+                        menuLibros.ModificarLibro(diccionarioLibros);
 
                         Console.Clear();
                                                                        
@@ -86,13 +80,14 @@ namespace GestionBiblioteca
                     case "5":
                         // Salir
                         seguir = false;
-                        Console.WriteLine("Muchas gracias por haber confiado en nuestra aplicación");
-                        Console.WriteLine("Namarië\nPresiona cualquiere tecla para salir");
+
+                        MetodosAuxiliares.MensajeDespedida();
+
                         Console.ReadLine();
                         break;
                     default:
-                        Console.WriteLine("Por favor, introduce una opción válida");
-                        Console.WriteLine("Presiona cualquier tecla para continuar");
+
+                        MetodosAuxiliares.MensajeOpcionNoValida();
                         Console.ReadLine();
                         Console.Clear();
                         break;
