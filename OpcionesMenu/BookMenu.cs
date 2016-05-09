@@ -8,7 +8,7 @@ namespace BookMenuApi
     public class BookMenu
     {
 
-        public void AddNewBook(Dictionary<string, Book> DictionaryName)
+        public void AddNewBook(Dictionary<string, Book> dictionaryName)
         {
             string isbn;
 
@@ -16,10 +16,10 @@ namespace BookMenuApi
             isbn = ModifyingBook.SetIsbn();
 
             // Compruebo que no este el ISBN guardado
-            if (DictionaryName.ContainsKey(isbn))
+            if (dictionaryName.ContainsKey(isbn))
             {
                 // Si el ISBN ya existe
-                ModifyingBook.OneMoreBookCopy(DictionaryName, isbn);
+                ModifyingBook.OneMoreBookCopy(dictionaryName, isbn);
             }
             else
             {
@@ -37,22 +37,23 @@ namespace BookMenuApi
                                 ModifyingBook.SetPublishMonth(),
                                 ModifyingBook.SetPublishDay());
                 }
-                finally
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Has introducido algún dato erroneo");
+                    Console.WriteLine(ex.Message);
                     Console.WriteLine("Se ha asignado como fecha de publicación el día de hoy");
                     book.PublishDate = DateTime.Today;
                 }
+
 
                 book.EntryDate = DateTime.Today;
                 book.Copies = 1;
 
                 // añado el libro al diccionario
-                DictionaryName.Add(isbn, book);
+                dictionaryName.Add(isbn, book);
             }
         }
 
-        public void ShowAllBooks(Dictionary<string, Book> DictionaryName)
+        public void ShowAllBooks(Dictionary<string, Book> dictionaryName)
         {
 
             // Listar todos los libros
@@ -60,7 +61,7 @@ namespace BookMenuApi
             Console.Clear();
             Console.WriteLine("Has elegido listar todos los libros");
 
-            ListElements.ListAllBooks(DictionaryName);
+            ListElements.ListAllBooks(dictionaryName);
             /*
             List<Book> bookList = DictionaryName.Values.ToList();
             bookList.ForEach(p=> Console.WriteLine("ISBN: {0}, Author: {1} and Title: {2}", p.ISBN, p.Author, p.Title));
@@ -70,12 +71,12 @@ namespace BookMenuApi
 
         }
 
-        public void DeleteBook(Dictionary<string, Book> DictionaryName)
+        public void DeleteBook(Dictionary<string, Book> dictionaryName)
         {
 
             Console.WriteLine("Has elegido eliminar un libro");
 
-            ListElements.ListAllBooks(DictionaryName);
+            ListElements.ListAllBooks(dictionaryName);
 
             string isbnToDelete;
 
@@ -84,15 +85,15 @@ namespace BookMenuApi
             {
                 Console.WriteLine("Introduce el ISBN del libro que quieras eliminar");
                 isbnToDelete = Console.ReadLine();
-            } while (!DictionaryName.ContainsKey(isbnToDelete));
+            } while (!dictionaryName.ContainsKey(isbnToDelete));
 
             Console.WriteLine("Estás seguro? (S/N)");
             string continuar = Console.ReadLine();
 
             if (continuar.Equals("S") || continuar.Equals("s"))
             {
-                DictionaryName.Remove(isbnToDelete);
-                ListarElementos.ListarLibros.ListarTodosLosLibros(DictionaryName);
+                dictionaryName.Remove(isbnToDelete);
+                ListarElementos.ListarLibros.ListarTodosLosLibros(dictionaryName);
             }
             else
             {
@@ -136,25 +137,42 @@ namespace BookMenuApi
 
                     switch (actionToDo)
                     {
-                        case "Fecha de publicacion":
-                            Console.Write("Introduce una nueva fecha de publicación (DD/MM/AAAA)");
-                            dictionaryName[isbnToModify].PublishDate = DateTime.Parse(Console.ReadLine());
+                        case "1": // ISBN
+                            dictionaryName[isbnToModify].ISBN = ModifyingBook.SetIsbn();
                             break;
-                        case "Fecha de alta":
+                        case "5": // Fecha de publicación
+
+                            try
+                            {
+                                dictionaryName[isbnToModify].PublishDate = new DateTime(ModifyingBook.SetPublishYear(),
+                                                                                            ModifyingBook.SetPublishMonth(),
+                                                                                            ModifyingBook.SetPublishDay());
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                Console.WriteLine("Se ha asignado como fecha de publicación el día de hoy");
+                                dictionaryName[isbnToModify].PublishDate = DateTime.Today;
+                            }
+                            break;
+
+                        case "4": // Fecha de alta
                             Console.Write("Introduce una nueva fecha de alta (DD/MM/AAAA): ");
                             dictionaryName[isbnToModify].EntryDate = DateTime.Parse(Console.ReadLine());
                             break;
-                        case "Ejemplares":
+                        case "6": // Ejemplares
                             Console.Write("Introduce una la cantidad de ejemplares que quieras: ");
                             dictionaryName[isbnToModify].Copies = int.Parse(Console.ReadLine());
                             break;
-                        case "Autor":
+                        case "2": // Autor
+
                             dictionaryName[isbnToModify].Author = ModifyingBook.SetAuthor();
                             break;
-                        case "Titulo":
+                        case "3": //Titulo
+
                             dictionaryName[isbnToModify].Title = ModifyingBook.SetTitle();
                             break;
-                        default:
+                        default: // Opción no valida
                             Console.WriteLine("Elige una opción válida: ");
                             actionToDo = Console.ReadLine();
                             break;
