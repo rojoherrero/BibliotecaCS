@@ -37,16 +37,13 @@ namespace LibraryManagement
 
                     case "1":
                         // Limpio la consola para no guarrearla mucho
-
                         Console.Clear();
-                        bookmenu.NewBook(bookDictionary);
+                        bookmenu.AddNewBook(bookDictionary);
                         Console.Clear();
-
                         break;
 
                     case "2":
                         // Listar todos los libros
-
                         Console.Clear();
                         bookmenu.ShowAllBooks(bookDictionary);
                         Console.Clear();
@@ -54,35 +51,31 @@ namespace LibraryManagement
 
                     case "3":
                         // Eliminar un libro(
-
                         Console.Clear();
                         bookmenu.DeleteBook(bookDictionary);
                         Console.Clear();
                         break;
 
                     case "4":
-
                         // Modificar Libro
-
                         Console.Clear();
                         bookmenu.ModifyBook(bookDictionary);
-                        Console.Clear();
-                                                                       
+                        Console.Clear();                                                                  
                         break;
 
                     case "5":
                         // Salir
-
                         follow = false;
                         HelpingMethodsApi.PartingMessge();
                         Console.ReadLine();
                         break;
-                    default:
 
+                    default:
                         HelpingMethodsApi.NonValidOptionMessage();
                         Console.ReadLine();
                         Console.Clear();
                         break;
+
                 }
             }
         }

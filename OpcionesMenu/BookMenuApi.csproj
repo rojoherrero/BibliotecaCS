@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelpingMethodsApi.cs" />
+    <Compile Include="ListElements.cs" />
+    <Compile Include="ModifyingBook.cs" />
     <Compile Include="BookMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,9 +54,6 @@
       <Project>{E1994A12-89A5-45A5-A186-01F3684C87F3}</Project>
       <Name>ListarElementos</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

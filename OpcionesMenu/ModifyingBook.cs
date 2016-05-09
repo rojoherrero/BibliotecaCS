@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookMenuApi
 {
-    internal class HelpingMethods
+    internal class ModifyingBook
     {
         public static void OneMoreBookCopy(Dictionary<string, Book> DictionaryName, string isbn)
         {
@@ -55,7 +55,7 @@ namespace BookMenuApi
             return returnYear;
         }
 
-        public static int SetPublishMOnth()
+        public static int SetPublishMonth()
         {
             int returnMonth;
             bool validMonth = false;

@@ -7,41 +7,35 @@ namespace BookMenuApi
 {
     public class BookMenu
     {
-        
-        public void NewBook(Dictionary<string, Book> DictionaryName)
+
+        public void AddNewBook(Dictionary<string, Book> DictionaryName)
         {
             string isbn;
 
             // Inicio la recogida de los datos para crear el nuevo libro
-
-            isbn = HelpingMethods.SetIsbn();
-
+            isbn = ModifyingBook.SetIsbn();
 
             // Compruebo que no este el ISBN guardado
-
             if (DictionaryName.ContainsKey(isbn))
             {
                 // Si el ISBN ya existe
-                HelpingMethods.OneMoreBookCopy(DictionaryName, isbn);
+                ModifyingBook.OneMoreBookCopy(DictionaryName, isbn);
             }
             else
             {
                 //El ISBN no existe
-
                 Book book = new Book();
-
-                // TODO intentar refactorizar menu principal
 
                 // Recogo los datos del libro y lo guardo en un libro nuevo
                 book.ISBN = isbn;
-                book.Title = HelpingMethods.SetTitle();
-                book.Author = HelpingMethods.SetAuthor();
+                book.Title = ModifyingBook.SetTitle();
+                book.Author = ModifyingBook.SetAuthor();
 
                 try
                 {
-                    book.PublishDate = new DateTime(HelpingMethods.SetPublishYear(),
-                                HelpingMethods.SetPublishMOnth(),
-                                HelpingMethods.SetPublishDay());
+                    book.PublishDate = new DateTime(ModifyingBook.SetPublishYear(),
+                                ModifyingBook.SetPublishMonth(),
+                                ModifyingBook.SetPublishDay());
                 }
                 finally
                 {
@@ -60,15 +54,18 @@ namespace BookMenuApi
 
         public void ShowAllBooks(Dictionary<string, Book> DictionaryName)
         {
-            //ListarLibros listarLibros = new ListarLibros();
+
             // Listar todos los libros
             // TODO refactorizar listar todos los libros
             Console.Clear();
             Console.WriteLine("Has elegido listar todos los libros");
 
-            ListarElementos.ListarLibros.ListarTodosLosLibros(DictionaryName);
-
-            Console.WriteLine("Pulsa cualquier tecla para volver al menu principal");
+            ListElements.ListAllBooks(DictionaryName);
+            /*
+            List<Book> bookList = DictionaryName.Values.ToList();
+            bookList.ForEach(p=> Console.WriteLine("ISBN: {0}, Author: {1} and Title: {2}", p.ISBN, p.Author, p.Title));
+            */
+            Console.WriteLine("=============\nPulsa cualquier tecla para volver al menu principal");
             Console.ReadLine();
 
         }
@@ -78,7 +75,7 @@ namespace BookMenuApi
 
             Console.WriteLine("Has elegido eliminar un libro");
 
-            ListarElementos.ListarLibros.ListarTodosLosLibros(DictionaryName);
+            ListElements.ListAllBooks(DictionaryName);
 
             string isbnToDelete;
 
@@ -114,7 +111,6 @@ namespace BookMenuApi
 
             if (dictionaryName.Count() != 0)
             {
-                ListarElementos.ListarLibros listarLibros = new ListarElementos.ListarLibros();
 
                 while (keepModifying)
                 {
@@ -123,7 +119,7 @@ namespace BookMenuApi
 
                     Console.WriteLine("Has elegido modificar un libro");
 
-                    ListarElementos.ListarLibros.ListarTodosLosLibros(dictionaryName);
+                    ListElements.ListAllBooks(dictionaryName);
 
                     string isbnToModify;
 
@@ -133,7 +129,7 @@ namespace BookMenuApi
                         isbnToModify = Console.ReadLine();
                     } while (!dictionaryName.ContainsKey(isbnToModify));
 
-                    ListarElementos.ListarLibros.InfoLibro(dictionaryName, isbnToModify);
+                    ListElements.ShowBookInfo(dictionaryName, isbnToModify);
 
                     Console.WriteLine("¿Qué quiere modificar? Introduce el número de la opción que quieres realizar");
                     string actionToDo = Console.ReadLine();
@@ -153,10 +149,10 @@ namespace BookMenuApi
                             dictionaryName[isbnToModify].Copies = int.Parse(Console.ReadLine());
                             break;
                         case "Autor":
-                            dictionaryName[isbnToModify].Author = HelpingMethods.SetAuthor();
+                            dictionaryName[isbnToModify].Author = ModifyingBook.SetAuthor();
                             break;
                         case "Titulo":
-                            dictionaryName[isbnToModify].Title = HelpingMethods.SetTitle();
+                            dictionaryName[isbnToModify].Title = ModifyingBook.SetTitle();
                             break;
                         default:
                             Console.WriteLine("Elige una opción válida: ");
@@ -171,7 +167,6 @@ namespace BookMenuApi
                         keepModifying = false;
                     }
                 }
-
             }
             else
             {
